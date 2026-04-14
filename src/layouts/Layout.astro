@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Abril Martínez Decena — Abogada de Extranjería en Zaragoza | AMD Abogados',
+  description = 'Abril Martínez Decena, abogada especializada en extranjería en Zaragoza. Arraigo, NIE, nacionalidad, reagrupación familiar y recursos. Primera consulta gratuita.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/abogada.jpg" />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/abogada.jpg" />
+    <meta name="theme-color" content="#152038" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Attorney",
+      "name": "Abril Martínez Decena — AMD Abogados",
+      "description": description,
+      "areaServed": "Zaragoza, Aragón, España",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Paseo de la Independencia 00",
+        "addressLocality": "Zaragoza",
+        "addressRegion": "Aragón",
+        "postalCode": "50001",
+        "addressCountry": "ES"
+      },
+      "telephone": "+34 653 41 30 88",
+      "email": "amartinezabogada@hotmail.com",
+      "sameAs": ["https://instagram.com/abrilmartinezabogada"],
+      "priceRange": "€€"
+    })} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

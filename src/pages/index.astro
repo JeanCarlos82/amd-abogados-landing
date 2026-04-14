@@ -1,0 +1,417 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+
+const servicios = [
+  { icon: 'file-text', title: 'Arraigo', desc: 'Social, laboral, familiar y por formación. Te guío en cada requisito.' },
+  { icon: 'id-card', title: 'NIE y TIE', desc: 'Obtención, renovación y modificación de tu documentación de residencia.' },
+  { icon: 'globe', title: 'Nacionalidad española', desc: 'Por residencia, matrimonio u origen. Preparación completa del expediente.' },
+  { icon: 'users', title: 'Reagrupación familiar', desc: 'Reúne a tu familia en España con garantías jurídicas.' },
+  { icon: 'briefcase', title: 'Residencia y trabajo', desc: 'Autorizaciones iniciales, renovaciones y modificaciones de residencia.' },
+  { icon: 'scale', title: 'Recursos y denegaciones', desc: 'Recurrimos resoluciones desfavorables ante la Administración y los tribunales.' },
+];
+
+const pasos = [
+  { n: '01', t: 'Consulta inicial gratuita', d: 'Hablamos 15 minutos por teléfono o WhatsApp para entender tu situación.' },
+  { n: '02', t: 'Análisis de tu caso', d: 'Estudio tu documentación y te explico con claridad tus opciones y plazos.' },
+  { n: '03', t: 'Gestión del trámite', d: 'Preparo y presento el expediente, y te mantengo informado en todo momento.' },
+  { n: '04', t: 'Resolución favorable', d: 'Te acompaño hasta obtener la respuesta de la Administración.' },
+];
+
+const testimonios = [
+  { nombre: 'Carlos M.', pais: 'Colombia', caso: 'Arraigo social', texto: 'Abril me ayudó a conseguir mi arraigo después de que me lo habían denegado. Explicación clara, trato cercano y todo salió adelante.' },
+  { nombre: 'Fatima E.', pais: 'Marruecos', caso: 'Reagrupación familiar', texto: 'Gracias a su trabajo pude traer a mis hijos a Zaragoza. Siempre estuvo disponible para resolver mis dudas.' },
+  { nombre: 'Andrés R.', pais: 'Venezuela', caso: 'Nacionalidad', texto: 'Llevaba años intentándolo sin éxito. Con Abril conseguí la nacionalidad española en menos de un año.' },
+];
+
+const faq = [
+  { q: '¿Cuánto cuesta la primera consulta?', a: 'La primera consulta de 15 minutos es totalmente gratuita y sin compromiso. Puede ser presencial en mi despacho de Zaragoza, por teléfono o WhatsApp.' },
+  { q: '¿Cuánto tarda un trámite de arraigo?', a: 'Los plazos varían según el tipo de arraigo y la carga de trabajo de la Oficina de Extranjería. De media, entre 3 y 6 meses desde la presentación del expediente.' },
+  { q: '¿Y si ya me han denegado un trámite?', a: 'Una denegación no es el final. En muchos casos es posible presentar un recurso de reposición o contencioso-administrativo. Analizamos tu caso y te indico si hay opciones reales de éxito.' },
+  { q: '¿Atiendes a clientes fuera de Zaragoza?', a: 'Sí. Trabajo con clientes de toda España mediante videollamada y gestión telemática. La documentación se puede enviar de forma segura.' },
+  { q: '¿En qué idiomas atiendes?', a: 'Español, inglés y francés. Para otros idiomas podemos coordinar intérprete.' },
+  { q: '¿Cómo se garantiza la confidencialidad?', a: 'Toda la información que me facilitas está protegida por el secreto profesional del abogado, regulado en el Estatuto de la Abogacía Española.' },
+];
+---
+<Layout>
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-navy-100">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="font-serif text-xl font-bold text-navy-900 tracking-wider">
+        AMD <span class="text-gold-500 font-normal">|</span> <span class="text-sm font-sans font-medium tracking-widest uppercase">Abogados</span>
+      </a>
+      <nav class="hidden md:flex gap-8 text-sm font-medium text-navy-700">
+        <a href="#servicios" class="hover:text-gold-500 transition">Servicios</a>
+        <a href="#sobre-mi" class="hover:text-gold-500 transition">Sobre mí</a>
+        <a href="#proceso" class="hover:text-gold-500 transition">Proceso</a>
+        <a href="#testimonios" class="hover:text-gold-500 transition">Testimonios</a>
+        <a href="#faq" class="hover:text-gold-500 transition">FAQ</a>
+      </nav>
+      <a href="#contacto" class="hidden sm:inline-flex bg-navy-800 hover:bg-navy-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition">
+        Consulta gratis
+      </a>
+      <button id="mobile-menu-toggle" class="md:hidden text-navy-900 p-2" aria-label="Abrir menú">
+        <Icon name="menu" size={24} />
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-navy-100 bg-white">
+      <nav class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1 text-navy-700 font-medium">
+        <a href="#servicios" class="py-3 border-b border-navy-100 hover:text-gold-500">Servicios</a>
+        <a href="#sobre-mi" class="py-3 border-b border-navy-100 hover:text-gold-500">Sobre mí</a>
+        <a href="#proceso" class="py-3 border-b border-navy-100 hover:text-gold-500">Proceso</a>
+        <a href="#testimonios" class="py-3 border-b border-navy-100 hover:text-gold-500">Testimonios</a>
+        <a href="#faq" class="py-3 border-b border-navy-100 hover:text-gold-500">FAQ</a>
+        <a href="#contacto" class="mt-4 mb-2 bg-navy-800 text-white text-center py-3 rounded-full font-semibold">Consulta gratis</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-navy-50 via-white to-navy-50">
+    <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div data-animate class="inline-flex items-center gap-2 bg-gold-400/15 text-gold-600 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full mb-6">
+          <span class="w-1.5 h-1.5 bg-gold-500 rounded-full"></span>
+          Abogada colegiada · ICAZ Zaragoza
+        </div>
+        <h1 data-animate data-animate-delay="1" class="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 leading-[1.1] mb-6">
+          Tu situación legal en España <span class="text-gold-500">tiene solución</span>
+        </h1>
+        <p data-animate data-animate-delay="2" class="text-lg text-navy-700 mb-8 leading-relaxed max-w-lg">
+          Soy <strong>Abril Martínez Decena</strong>, abogada especializada en <strong>derecho de extranjería</strong> en Zaragoza.
+          Arraigo, NIE, nacionalidad, reagrupación familiar y recursos — con trato cercano y explicaciones claras.
+        </p>
+        <div data-animate data-animate-delay="3" class="flex flex-wrap gap-4 mb-10">
+          <a href="#contacto" class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-7 py-4 rounded-full transition shadow-lg shadow-navy-900/10">
+            Agendar consulta gratis
+            <Icon name="arrow-right" size={18} />
+          </a>
+          <a href="tel:+34653413088" class="inline-flex items-center gap-2 border-2 border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white font-semibold px-7 py-4 rounded-full transition">
+            <Icon name="phone" size={18} />
+            653 41 30 88
+          </a>
+        </div>
+        <div data-animate data-animate-delay="4" class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-navy-700">
+          <div class="flex items-center gap-2">
+            <span class="flex text-gold-500">
+              <Icon name="star" size={14} class="fill-current" />
+              <Icon name="star" size={14} class="fill-current" />
+              <Icon name="star" size={14} class="fill-current" />
+              <Icon name="star" size={14} class="fill-current" />
+              <Icon name="star" size={14} class="fill-current" />
+            </span>
+            4.9/5 en Google
+          </div>
+          <div class="flex items-center gap-2"><Icon name="check" size={16} class="text-gold-500" /> 10+ años de experiencia</div>
+          <div class="flex items-center gap-2"><Icon name="check" size={16} class="text-gold-500" /> 500+ casos resueltos</div>
+        </div>
+      </div>
+      <div class="relative" data-animate data-animate-delay="2">
+        <div class="absolute -inset-4 bg-gold-400/10 rounded-3xl rotate-3"></div>
+        <div class="relative aspect-[4/5] rounded-2xl shadow-2xl overflow-hidden bg-navy-100 ring-4 ring-white">
+          <img src="/abogada.jpg" alt="Abril Martínez Decena, abogada de extranjería en Zaragoza" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/30 via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <div class="font-serif text-lg font-bold">Abril Martínez Decena</div>
+            <div class="text-xs text-white/80">Abogada · ICAZ Zaragoza</div>
+          </div>
+        </div>
+        <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl px-5 py-4 border border-navy-100">
+          <div class="text-2xl font-bold text-navy-900">500+</div>
+          <div class="text-xs text-navy-700">Casos resueltos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="bg-navy-900 text-white">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div data-animate><div class="text-3xl font-bold text-gold-400 font-serif">10+</div><div class="text-sm text-white/70 mt-1">Años ejerciendo</div></div>
+      <div data-animate data-animate-delay="1"><div class="text-3xl font-bold text-gold-400 font-serif">500+</div><div class="text-sm text-white/70 mt-1">Casos ganados</div></div>
+      <div data-animate data-animate-delay="2"><div class="text-3xl font-bold text-gold-400 font-serif">95%</div><div class="text-sm text-white/70 mt-1">Tasa de éxito</div></div>
+      <div data-animate data-animate-delay="3"><div class="text-3xl font-bold text-gold-400 font-serif">3</div><div class="text-sm text-white/70 mt-1">Idiomas: ES · EN · FR</div></div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-animate>
+        <div class="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">Áreas de práctica</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-4">Trámites que gestiono</h2>
+        <p class="text-navy-700 max-w-2xl mx-auto">Asesoramiento integral en derecho de extranjería en Zaragoza y toda España.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {servicios.map((s, i) => (
+          <div data-animate data-animate-delay={String((i % 3) + 1)} class="group bg-white border border-navy-100 rounded-2xl p-7 hover:border-gold-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div class="w-14 h-14 rounded-xl bg-gold-400/10 flex items-center justify-center text-gold-600 mb-5 group-hover:bg-navy-800 group-hover:text-gold-400 transition-colors">
+              <Icon name={s.icon} size={26} />
+            </div>
+            <h3 class="text-xl font-bold text-navy-900 mb-2">{s.title}</h3>
+            <p class="text-navy-700 text-sm leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MI -->
+  <section id="sobre-mi" class="py-24 bg-navy-50">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-5 gap-12 items-center">
+      <div class="md:col-span-2" data-animate>
+        <div class="aspect-square rounded-2xl shadow-xl overflow-hidden bg-navy-100 ring-4 ring-white">
+          <img src="/abogada.jpg" alt="Abril Martínez Decena" class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <div class="md:col-span-3" data-animate data-animate-delay="1">
+        <div class="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">Sobre mí</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-6">Abril Martínez Decena</h2>
+        <p class="text-navy-700 mb-4 leading-relaxed">
+          Soy abogada especializada en derecho de extranjería y fundadora de <strong>AMD Abogados</strong> en Zaragoza.
+          Llevo años ayudando a personas migrantes y a sus familias a construir su vida en España.
+        </p>
+        <p class="text-navy-700 mb-6 leading-relaxed">
+          Sé que un trámite de extranjería no es solo un papel: es tu futuro, el de tu familia y el de tus hijos.
+          Por eso trabajo con <strong>transparencia, cercanía y rigor técnico</strong>. Te explico en un lenguaje claro
+          qué opciones tienes, cuánto tardará y cuánto costará. Sin letra pequeña.
+        </p>
+        <ul class="space-y-3 text-navy-700">
+          <li class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-gold-500 shrink-0 mt-0.5" /> Colegiada en el Ilustre Colegio de Abogados de Zaragoza (ICAZ)</li>
+          <li class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-gold-500 shrink-0 mt-0.5" /> Especialización exclusiva en derecho de extranjería</li>
+          <li class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-gold-500 shrink-0 mt-0.5" /> Atención personalizada en cada caso</li>
+          <li class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-gold-500 shrink-0 mt-0.5" /> Idiomas: español, inglés y francés</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section id="proceso" class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-animate>
+        <div class="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">Cómo trabajo</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-navy-900">Tu caso, en 4 pasos claros</h2>
+      </div>
+      <div class="grid md:grid-cols-4 gap-6">
+        {pasos.map((p, i) => (
+          <div data-animate data-animate-delay={String(i + 1)} class="relative bg-white border border-navy-100 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div class="text-5xl font-serif font-bold text-gold-400 mb-3">{p.n}</div>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">{p.t}</h3>
+            <p class="text-sm text-navy-700 leading-relaxed">{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section id="testimonios" class="py-24 bg-navy-900 text-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-animate>
+        <div class="text-gold-400 text-sm font-semibold uppercase tracking-wider mb-3">Lo que dicen mis clientes</div>
+        <h2 class="text-3xl md:text-4xl font-bold">Historias reales, resultados reales</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {testimonios.map((t, i) => (
+          <div data-animate data-animate-delay={String(i + 1)} class="bg-white/5 border border-white/10 rounded-2xl p-7 backdrop-blur">
+            <div class="flex gap-1 text-gold-400 mb-4">
+              <Icon name="star" size={18} class="fill-current" />
+              <Icon name="star" size={18} class="fill-current" />
+              <Icon name="star" size={18} class="fill-current" />
+              <Icon name="star" size={18} class="fill-current" />
+              <Icon name="star" size={18} class="fill-current" />
+            </div>
+            <p class="text-white/90 leading-relaxed mb-6 italic">"{t.texto}"</p>
+            <div class="border-t border-white/10 pt-4">
+              <div class="font-semibold">{t.nombre}</div>
+              <div class="text-xs text-white/60 mt-0.5">{t.pais} · {t.caso}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-24">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-14" data-animate>
+        <div class="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">Preguntas frecuentes</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-navy-900">Resolvemos tus dudas</h2>
+      </div>
+      <div class="space-y-3">
+        {faq.map((f, i) => (
+          <details data-animate data-animate-delay={String((i % 3) + 1)} class="group bg-white border border-navy-100 rounded-xl overflow-hidden hover:border-gold-400 transition-colors">
+            <summary class="cursor-pointer px-6 py-5 font-semibold text-navy-900 flex justify-between items-center list-none gap-4">
+              <span>{f.q}</span>
+              <span class="text-gold-500 group-open:rotate-45 transition-transform shrink-0">
+                <Icon name="plus" size={22} />
+              </span>
+            </summary>
+            <div class="px-6 pb-5 text-navy-700 leading-relaxed">{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="py-24 bg-gradient-to-br from-navy-800 to-navy-900 text-white">
+    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+      <div data-animate>
+        <div class="text-gold-400 text-sm font-semibold uppercase tracking-wider mb-3">Consulta gratis</div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Hablemos de tu caso</h2>
+        <p class="text-white/80 mb-8 leading-relaxed">
+          Respondo en menos de 24 horas laborables. Toda la información que compartas está protegida por el secreto profesional.
+        </p>
+        <div class="space-y-5 text-white/90">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-gold-400/15 flex items-center justify-center text-gold-400 shrink-0">
+              <Icon name="map-pin" size={20} />
+            </div>
+            <div>
+              <div class="font-semibold">Despacho en Zaragoza</div>
+              <div class="text-sm text-white/70">Paseo de la Independencia, 00 · 50001 Zaragoza</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-gold-400/15 flex items-center justify-center text-gold-400 shrink-0">
+              <Icon name="phone" size={20} />
+            </div>
+            <div>
+              <a href="tel:+34653413088" class="font-semibold hover:text-gold-400 transition">+34 653 41 30 88</a>
+              <div class="text-sm text-white/70">Lunes a viernes · 9:00 – 19:00</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-gold-400/15 flex items-center justify-center text-gold-400 shrink-0">
+              <Icon name="mail" size={20} />
+            </div>
+            <div>
+              <a href="mailto:amartinezabogada@hotmail.com" class="font-semibold hover:text-gold-400 transition break-all">amartinezabogada@hotmail.com</a>
+              <div class="text-sm text-white/70">Respuesta en menos de 24h</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-gold-400/15 flex items-center justify-center text-gold-400 shrink-0">
+              <Icon name="instagram" size={20} />
+            </div>
+            <div>
+              <a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener" class="font-semibold hover:text-gold-400 transition">@abrilmartinezabogada</a>
+              <div class="text-sm text-white/70">Sígueme en Instagram</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="bg-white rounded-2xl p-8 text-navy-900 shadow-2xl" data-animate data-animate-delay="1">
+        <div class="mb-5">
+          <label class="block text-sm font-semibold mb-2">Mi nombre es</label>
+          <input type="text" required class="w-full px-4 py-3 border border-navy-100 rounded-lg focus:outline-none focus:border-gold-500 transition" placeholder="Nombre y apellidos" />
+        </div>
+        <div class="mb-5">
+          <label class="block text-sm font-semibold mb-2">Mi teléfono</label>
+          <input type="tel" required class="w-full px-4 py-3 border border-navy-100 rounded-lg focus:outline-none focus:border-gold-500 transition" placeholder="+34 600 000 000" />
+        </div>
+        <div class="mb-5">
+          <label class="block text-sm font-semibold mb-2">Mi email</label>
+          <input type="email" required class="w-full px-4 py-3 border border-navy-100 rounded-lg focus:outline-none focus:border-gold-500 transition" placeholder="tu@email.com" />
+        </div>
+        <div class="mb-5">
+          <label class="block text-sm font-semibold mb-2">Cuéntame tu situación</label>
+          <textarea rows="4" class="w-full px-4 py-3 border border-navy-100 rounded-lg focus:outline-none focus:border-gold-500 transition resize-none" placeholder="Describe brevemente tu caso..."></textarea>
+        </div>
+        <label class="flex items-start gap-2 text-xs text-navy-700 mb-5">
+          <input type="checkbox" required class="mt-0.5" />
+          <span>He leído y acepto la <a href="/politica-privacidad" class="text-gold-600 underline">política de privacidad</a> (RGPD).</span>
+        </label>
+        <button type="submit" class="w-full bg-navy-800 hover:bg-navy-900 text-white font-semibold py-4 rounded-lg transition inline-flex items-center justify-center gap-2">
+          Enviar consulta gratuita
+          <Icon name="arrow-right" size={18} />
+        </button>
+        <p class="text-xs text-navy-700 text-center mt-4 inline-flex items-center justify-center gap-1 w-full">
+          <Icon name="shield-check" size={14} class="text-gold-600" />
+          Protegido por secreto profesional. Respuesta en menos de 24h.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy-900 text-white/60 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8 text-sm">
+      <div>
+        <div class="font-serif text-xl font-bold text-white mb-3 tracking-wider">AMD <span class="text-gold-400">|</span> Abogados</div>
+        <p class="leading-relaxed">Abril Martínez Decena · Abogada colegiada en extranjería. Zaragoza, Aragón.</p>
+      </div>
+      <div>
+        <div class="font-semibold text-white mb-3">Contacto</div>
+        <ul class="space-y-1.5">
+          <li>Paseo de la Independencia, 00</li>
+          <li>50001 Zaragoza</li>
+          <li><a href="tel:+34653413088" class="hover:text-gold-400">+34 653 41 30 88</a></li>
+          <li><a href="mailto:amartinezabogada@hotmail.com" class="hover:text-gold-400 break-all">amartinezabogada@hotmail.com</a></li>
+          <li><a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener" class="hover:text-gold-400">@abrilmartinezabogada</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold text-white mb-3">Legal</div>
+        <ul class="space-y-1.5">
+          <li><a href="/aviso-legal" class="hover:text-gold-400">Aviso legal</a></li>
+          <li><a href="/politica-privacidad" class="hover:text-gold-400">Política de privacidad</a></li>
+          <li><a href="/politica-cookies" class="hover:text-gold-400">Política de cookies</a></li>
+          <li>Nº colegiada ICAZ: 0000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 py-5 text-center text-xs">
+      © {new Date().getFullYear()} Abril Martínez Decena · AMD Abogados · Todos los derechos reservados
+    </div>
+  </footer>
+
+  <!-- WhatsApp flotante -->
+  <a
+    href="https://wa.me/34653413088?text=Hola%20Abril%2C%20quiero%20consultar%20sobre%20mi%20caso%20de%20extranjer%C3%ADa"
+    target="_blank"
+    rel="noopener"
+    class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#1ebe5a] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl hover:scale-110 transition-transform"
+    aria-label="Contactar por WhatsApp"
+  >
+    <Icon name="whatsapp" size={28} />
+  </a>
+
+  <CookieBanner />
+
+  <script is:inline>
+    // Mobile menu toggle
+    (function () {
+      const btn = document.getElementById('mobile-menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+      menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => menu.classList.add('hidden')));
+    })();
+
+    // Scroll-in animations
+    (function () {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('[data-animate]').forEach((el) => el.classList.add('in-view'));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in-view');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('[data-animate]').forEach((el) => io.observe(el));
+    })();
+  </script>
+</Layout>

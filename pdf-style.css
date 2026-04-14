@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: #152038;
+  line-height: 1.6;
+  font-size: 11pt;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #152038;
+  font-size: 26pt;
+  border-bottom: 3px solid #c9a15a;
+  padding-bottom: 14px;
+  margin-top: 0;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #152038;
+  font-size: 16pt;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  padding-left: 12px;
+  border-left: 4px solid #c9a15a;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: #2a3a5c;
+  font-size: 12pt;
+  margin-top: 20px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+strong {
+  color: #152038;
+  font-weight: 600;
+}
+
+em {
+  color: #6b7280;
+  font-style: italic;
+}
+
+ul, ol {
+  padding-left: 22px;
+  margin: 10px 0;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+input[type="checkbox"], li::marker {
+  color: #c9a15a;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 28px 0;
+}
+
+blockquote {
+  border-left: 3px solid #c9a15a;
+  background: #faf8f3;
+  padding: 10px 16px;
+  margin: 14px 0;
+  color: #2a3a5c;
+  font-style: italic;
+}
+
+code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10pt;
+}
+
+/* Checklist items */
+li:has(> input[type="checkbox"]) {
+  list-style: none;
+  margin-left: -18px;
+}
+
+@page {
+  margin: 2cm 1.8cm 2cm 1.8cm;
+  size: A4;
+}
