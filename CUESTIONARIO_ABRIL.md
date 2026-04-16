@@ -10,6 +10,21 @@ Si alguna pregunta no la tienes clara o te da pereza, **déjala en blanco**. Yo 
 
 ---
 
+> ## ⚠️ Una cosa importante antes de empezar
+>
+> Este cuestionario es **solo sobre ti y tu despacho**. Te pido que **NO me mandes en ningún momento**:
+>
+> - Nombres, DNIs ni datos de clientes concretos.
+> - Capturas de WhatsApp, emails o mensajes de clientes (aunque sean de agradecimiento).
+> - Documentación de expedientes o resoluciones.
+> - Fotos donde se vean caras de clientes o papeles con datos encima de la mesa.
+>
+> Todo eso está protegido por tu **secreto profesional** (Art. 542 LOPJ) y por el **RGPD** — y en extranjería, los datos de tus clientes son "categoría especial" (nacionalidad + situación administrativa), así que hay que tratarlos con mimo extra. Si yo los recibo sin consentimiento, te estaría metiendo en un lío con REICAZ y con la AEPD sin querer. Mejor prevenir.
+>
+> Cuando haga falta información de clientes (en la sección de testimonios), te explico abajo cómo hacerlo bien con consentimiento por escrito.
+
+---
+
 ## 1. Sobre ti
 
 Quiero contar un poquito quién eres para que las personas que entren a tu web sientan confianza. No hace falta que escribas bonito — cuéntamelo como si me lo contaras tomando un café.
@@ -34,7 +49,7 @@ Quiero contar un poquito quién eres para que las personas que entren a tu web s
 
 - **¿La gente tiene que pedir cita antes de ir, o pueden pasarse sin avisar?**
 
-- **¿Tienes número de colegiada del ICAZ (Colegio de Abogados de Zaragoza)?** Es el numerito que te dieron cuando te colegiaste.
+- **¿Tienes número de colegiada de REICAZ (Real e Ilustre Colegio de Abogados de Zaragoza)?** Es el numerito que te dieron cuando te colegiaste.
 
 ---
 
@@ -70,19 +85,25 @@ Te pongo una lista. Solo **pon una X al lado** de los que sí haces. Si falta al
 
 Esto es **lo más importante de toda la web**. La gente confía mucho más cuando lee que otros ya han pasado por lo mismo y les fue bien.
 
-Necesito **3 o 4 testimonios**. Tres formas fáciles de conseguirlos, elige la que más te guste:
+**Pero esto lo tenemos que hacer bien.** Publicar un testimonio con datos de un cliente real (nombre, país de origen, trámite) son datos personales protegidos por RGPD, y en extranjería son **categoría especial**. Anonimizar no basta: hace falta **consentimiento expreso, informado y por escrito** del cliente antes de publicar nada.
 
-**Opción 1 (la más fácil):** ¿Tienes algún mensaje de WhatsApp, email o reseña donde un cliente te haya dado las gracias? Pásame capturas y yo las paso a texto.
+**Cómo lo hacemos entonces:**
 
-**Opción 2:** Piensa en 3 clientes contentos recientes y escríbeme de memoria qué te dijeron, más o menos. Puedo cambiar los nombres si quieres proteger su identidad.
+**Opción A (recomendada) — Pedir consentimiento a 3 clientes contentos.**
+Mándales un WhatsApp con este mensaje de plantilla (cópialo tal cual):
 
-**Opción 3:** Mándame un WhatsApp a 3 clientes que sepas que están felices, pregúntales si te pueden escribir 2-3 líneas sobre su experiencia contigo. La mayoría dice que sí encantados.
+> *"Hola [nombre], estoy preparando mi nueva página web y me haría mucha ilusión incluir tu experiencia como testimonio. Si te parece bien, ¿me podrías escribir 2-3 líneas contando cómo fue trabajar conmigo? Se publicaría con el nombre que tú me digas (puede ser solo tu primer nombre, inicial, o un nombre inventado) y el tipo de trámite, sin ningún otro dato tuyo. Puedes retirar tu consentimiento cuando quieras escribiéndome. ¿Me das tu OK por aquí mismo respondiendo 'sí'? ¡Muchísimas gracias!"*
 
-Para cada testimonio solo necesito saber:
-- Nombre (puede ser solo el primero o inventado)
-- De qué país viene
-- Qué trámite le hiciste
-- Qué dijo (2 o 3 líneas basta)
+Cuando te respondan "sí", guarda esa conversación (esa es tu prueba de consentimiento). Luego me pasas **solo el texto del testimonio** y:
+- Qué nombre quieren que aparezca (primer nombre, inicial, inventado).
+- De qué país son.
+- Qué trámite fue.
+
+**Opción B (si prefieres no molestar a nadie):** dejamos 3 testimonios **genéricos inventados** en la web, claramente marcados como ejemplos, y los sustituimos más adelante cuando tengas consentimientos reales. No es ideal pero es 100% legal.
+
+**Opción C:** ¿tienes reseñas públicas en Google Maps del despacho? Esas ya son públicas y con consentimiento implícito del autor — pásame el **enlace a la reseña en Google** (no capturas) y las cito correctamente.
+
+⚠️ **Lo que NO vamos a hacer**: capturas de WhatsApp/email con clientes, aunque sean mensajes de agradecimiento. Eso es secreto profesional y no puedo tocarlo.
 
 ---
 
@@ -164,13 +185,16 @@ Esta pregunta es voluntaria pero si me contestas, hacemos algo muy especial con 
 
 ## 11. Datos para la parte legal de abajo del todo
 
-La web, por ley española, tiene que tener un texto pequeñito en el pie con tu nombre completo, DNI y dirección (es obligatorio para todas las webs profesionales). Esto es lo único aburrido que te voy a pedir:
+La web, por la LSSI-CE (Art. 10), tiene que identificarte como prestadora del servicio. Buenas noticias: **NO hace falta publicar tu DNI**. Con tu nº de colegiada de REICAZ se cumple la ley igual y expones muchos menos datos personales. Así que solo necesito:
 
 - **Nombre completo:** Abril Martínez Decena ✅
-- **DNI:** _______________________
-- **Dirección fiscal del despacho:** _______________________
+- **Nº de colegiada REICAZ:** _______________________
+- **Dirección profesional del despacho:** C/ Coso 77, principal izquierda, 50001 Zaragoza ✅
 
-*(Esto no se muestra grande, solo en letra pequeña al final de la página. Nadie lo lee salvo la ley.)*
+**Opcional, solo si tú prefieres ponerlo** (no es obligatorio):
+- NIF: _______________________
+
+*(Esto va en letra pequeña al final de la página. Mi recomendación: solo nº de colegiada, sin NIF ni DNI. Es lo que hace la mayoría de despachos y cumple perfectamente la ley.)*
 
 ---
 

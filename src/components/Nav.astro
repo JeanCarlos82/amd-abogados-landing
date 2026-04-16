@@ -1,0 +1,253 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  /** When true, nav starts transparent on top of a dark hero and solidifies on scroll */
+  overHero?: boolean;
+}
+const { overHero = true } = Astro.props;
+
+const links = [
+  { href: '#servicios', label: 'Áreas', subtitle: 'Extranjería, penal y familia' },
+  { href: '#sobre-mi', label: 'Sobre mí', subtitle: 'Quién soy y cómo trabajo' },
+  { href: '#proceso', label: 'Proceso', subtitle: 'Tu caso en 4 pasos claros' },
+  { href: '#compromiso', label: 'Compromiso', subtitle: 'Lo que siempre cumplo contigo' },
+  { href: '#faq', label: 'FAQ', subtitle: 'Preguntas frecuentes' },
+];
+---
+<!-- OPCIÓN C · Hamburger fullscreen minimalista -->
+<header
+  id="nav-wrapper"
+  data-over-hero={overHero ? 'true' : 'false'}
+  class:list={[
+    'fixed top-0 left-0 right-0 z-50 transition-colors duration-300',
+    overHero ? 'bg-transparent' : 'bg-burgundy-900/95 backdrop-blur-xl border-b border-cream-300/10'
+  ]}
+>
+  <div class="max-w-7xl mx-auto px-6 md:px-10 h-20 md:h-24 flex items-center justify-between">
+    <!-- Logo (left) -->
+    <a href="/" aria-label="AMD Abogados — inicio" class="flex items-baseline gap-2 group select-none">
+      <span class="font-logo text-5xl md:text-6xl leading-none text-cream-300 group-hover:text-cream-200 transition-colors">Amd</span>
+      <span class="hidden sm:inline text-[10px] font-sans uppercase tracking-[0.3em] text-cream-100/70">Abogados</span>
+    </a>
+
+    <!-- Menu button (right) -->
+    <button
+      id="menu-open"
+      class="group flex items-center gap-3 text-cream-100 hover:text-cream-300 transition-colors cursor-pointer"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="fullscreen-menu"
+    >
+      <span class="hidden sm:inline text-[11px] font-semibold uppercase tracking-[0.3em]">Menú</span>
+      <span class="relative flex flex-col items-end gap-[5px] w-8 h-6 justify-center">
+        <span class="block h-[2px] w-8 bg-current transition-all duration-300"></span>
+        <span class="block h-[2px] w-5 bg-current transition-all duration-300 group-hover:w-8"></span>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- FULLSCREEN MENU OVERLAY -->
+<div
+  id="fullscreen-menu"
+  class="fixed inset-0 z-[60] bg-burgundy-900 text-white hidden opacity-0 transition-opacity duration-400"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="menu-heading"
+  aria-hidden="true"
+>
+  <!-- Watermark caligráfico gigante detrás -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center select-none overflow-hidden">
+    <span class="font-logo text-[32rem] md:text-[48rem] leading-none text-cream-300/[0.04] watermark-drift">Amd</span>
+  </div>
+  <!-- Gradiente radial -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_theme(colors.burgundy.800)_0%,_theme(colors.burgundy.900)_55%,_theme(colors.burgundy.950)_100%)]"></div>
+
+  <div class="relative h-full flex flex-col">
+    <!-- Top bar inside menu: logo + close -->
+    <div class="flex items-center justify-between px-6 md:px-10 h-20 md:h-24 shrink-0 border-b border-cream-300/10">
+      <a href="/" aria-label="AMD Abogados — inicio" class="flex items-baseline gap-2 select-none">
+        <span class="font-logo text-5xl md:text-6xl leading-none text-cream-300">Amd</span>
+        <span class="hidden sm:inline text-[10px] font-sans uppercase tracking-[0.3em] text-cream-100/70">Abogados</span>
+      </a>
+      <button
+        id="menu-close"
+        class="group flex items-center gap-3 text-cream-100 hover:text-cream-300 transition-colors cursor-pointer"
+        aria-label="Cerrar menú"
+      >
+        <span class="hidden sm:inline text-[11px] font-semibold uppercase tracking-[0.3em]">Cerrar</span>
+        <span class="relative w-8 h-8 flex items-center justify-center">
+          <span class="absolute h-[2px] w-8 bg-current rotate-45"></span>
+          <span class="absolute h-[2px] w-8 bg-current -rotate-45"></span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Center: big serif links -->
+    <nav
+      aria-label="Navegación principal"
+      class="relative flex-1 flex flex-col items-center justify-center px-6 md:px-10"
+    >
+      <h2 id="menu-heading" class="sr-only">Menú principal</h2>
+      <ul class="w-full max-w-3xl space-y-3 md:space-y-5">
+        {links.map((l, i) => (
+          <li class="menu-item overflow-hidden" style={`--i: ${i}`}>
+            <a
+              href={l.href}
+              class="group block py-2 md:py-3 border-b border-cream-300/10 hover:border-cream-300/40 transition-colors"
+            >
+              <div class="flex items-baseline gap-4 md:gap-6">
+                <span class="text-[10px] md:text-xs font-sans uppercase tracking-[0.3em] text-cream-100/40 shrink-0 w-6 md:w-8">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span class="font-serif text-4xl sm:text-5xl md:text-7xl font-semibold text-cream-100 group-hover:text-cream-300 group-hover:translate-x-3 md:group-hover:translate-x-5 transition-all duration-400 leading-none">
+                  {l.label}
+                </span>
+              </div>
+              <div class="pl-10 md:pl-14 mt-1 text-xs md:text-sm text-cream-100/50 group-hover:text-cream-100/80 transition-colors">
+                {l.subtitle}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Primary CTA below -->
+      <div class="menu-item mt-10 md:mt-14" style="--i: 5">
+        <a
+          href="#contacto"
+          data-menu-close
+          class="inline-flex items-center gap-3 bg-cream-300 hover:bg-cream-200 text-burgundy-900 font-semibold px-8 md:px-10 py-4 md:py-5 rounded-full text-sm md:text-base uppercase tracking-[0.2em] shadow-2xl shadow-burgundy-950/60 transition hover:-translate-y-0.5"
+        >
+          Hablar con Abril
+          <Icon name="arrow-right" size={18} />
+        </a>
+      </div>
+    </nav>
+
+    <!-- Bottom: contact info -->
+    <div class="relative shrink-0 border-t border-cream-300/10 px-6 md:px-10 py-6 md:py-8">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 text-xs md:text-sm">
+        <div class="menu-item flex items-center gap-3 text-cream-100/80" style="--i: 6">
+          <Icon name="phone" size={16} class="text-cream-300 shrink-0" />
+          <a href="tel:+34653413088" class="hover:text-cream-300 transition-colors">+34 653 41 30 88</a>
+        </div>
+        <div class="menu-item flex items-center gap-3 text-cream-100/80" style="--i: 7">
+          <Icon name="mail" size={16} class="text-cream-300 shrink-0" />
+          <a href="mailto:abrilmartinez@reicaz.com" class="hover:text-cream-300 transition-colors break-all">abrilmartinez@reicaz.com</a>
+        </div>
+        <div class="menu-item flex items-center gap-3 text-cream-100/80" style="--i: 8">
+          <Icon name="map-pin" size={16} class="text-cream-300 shrink-0" />
+          <a href="https://maps.google.com/?q=C/+Coso+77,+50001+Zaragoza" target="_blank" rel="noopener" class="hover:text-cream-300 transition">C/ Coso 77, Pral. Izda. · 50001 Zaragoza</a>
+        </div>
+      </div>
+      <div class="menu-item max-w-7xl mx-auto mt-5 pt-5 border-t border-cream-300/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[11px] text-cream-100/60" style="--i: 9">
+        <div>Abril Martínez Decena · Abogada colegiada en REICAZ · Derecho de extranjería</div>
+        <a
+          href="https://instagram.com/abrilmartinezabogada"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram de Abril (abre en nueva pestaña)"
+          class="flex items-center gap-2 hover:text-cream-300 transition-colors"
+        >
+          <Icon name="instagram" size={14} />
+          @abrilmartinezabogada
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Entrance animation: each menu item slides in from right with stagger */
+  @keyframes menuItemIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  #fullscreen-menu.is-open .menu-item {
+    animation: menuItemIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(0.1s + var(--i, 0) * 0.08s);
+  }
+
+  /* Lock body scroll when menu open */
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #fullscreen-menu.is-open .menu-item {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  function setupNav() {
+    const wrapper = document.getElementById('nav-wrapper');
+    const openBtn = document.getElementById('menu-open');
+    const closeBtn = document.getElementById('menu-close');
+    const menu = document.getElementById('fullscreen-menu');
+    if (!wrapper || !openBtn || !closeBtn || !menu) return;
+
+    // Scroll solidification (only when over hero)
+    const overHero = wrapper.getAttribute('data-over-hero') === 'true';
+    if (overHero) {
+      const threshold = 60;
+      const update = () => {
+        const scrolled = window.scrollY > threshold;
+        wrapper.classList.toggle('bg-transparent', !scrolled);
+        wrapper.classList.toggle('bg-burgundy-900/95', scrolled);
+        wrapper.classList.toggle('backdrop-blur-xl', scrolled);
+        wrapper.classList.toggle('border-b', scrolled);
+        wrapper.classList.toggle('border-cream-300/10', scrolled);
+      };
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    }
+
+    let lastFocused: HTMLElement | null = null;
+
+    const openMenu = () => {
+      lastFocused = document.activeElement as HTMLElement;
+      menu.classList.remove('hidden');
+      document.body.classList.add('menu-open');
+      void menu.offsetWidth;
+      menu.classList.add('is-open');
+      menu.style.opacity = '1';
+      menu.setAttribute('aria-hidden', 'false');
+      openBtn.setAttribute('aria-expanded', 'true');
+      const firstLink = menu.querySelector('a');
+      (firstLink as HTMLElement | null)?.focus();
+    };
+
+    const closeMenu = () => {
+      menu.style.opacity = '0';
+      menu.classList.remove('is-open');
+      document.body.classList.remove('menu-open');
+      menu.setAttribute('aria-hidden', 'true');
+      openBtn.setAttribute('aria-expanded', 'false');
+      setTimeout(() => {
+        menu.classList.add('hidden');
+        lastFocused?.focus();
+      }, 400);
+    };
+
+    openBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+
+    // Close menu when any link inside is clicked
+    menu.querySelectorAll('a[href]').forEach((a) =>
+      a.addEventListener('click', closeMenu)
+    );
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+        closeMenu();
+      }
+    });
+  }
+
+  setupNav();
+  document.addEventListener('astro:page-load', setupNav);
+</script>

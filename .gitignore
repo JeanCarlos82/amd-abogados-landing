@@ -7,3 +7,6 @@ dist/
 .DS_Store
 *.log
 .claude/
+
+# Local-only design references (not deployed)
+tarjetas_ref.pdf

@@ -1,17 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-50: #f2f4f8;
-  --color-navy-100: #dde3ec;
-  --color-navy-600: #2a3a5c;
-  --color-navy-700: #1f2c47;
-  --color-navy-800: #152038;
-  --color-navy-900: #0b1424;
-  --color-gold-400: #c9a15a;
-  --color-gold-500: #b4884a;
-  --color-gold-600: #9b6f36;
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --color-burgundy-50: #fbf4f4;
+  --color-burgundy-100: #f5e1e3;
+  --color-burgundy-200: #ead0d3;
+  --color-burgundy-600: #7a2329;
+  --color-burgundy-700: #611b20;
+  --color-burgundy-800: #4d1519;
+  --color-burgundy-900: #38090d;
+  --color-cream-50: #fbf6ec;
+  --color-cream-100: #f5ead2;
+  --color-cream-200: #efdfbb;
+  --color-cream-300: #ebd5af;
+  --color-cream-400: #d9b87a;
+  --color-cream-500: #c9a66b;
+  --color-cream-600: #8b6a3a;
+  --color-cream-700: #6b5028;
+  --font-serif: "EB Garamond", "Playfair Display", Georgia, serif;
+  --font-sans: "Lato", "Inter", system-ui, sans-serif;
+  --font-logo: "Allura", "Dancing Script", cursive;
 }
 
 html {
@@ -20,36 +27,174 @@ html {
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-navy-900);
-  background: #fafaf8;
+  color: var(--color-burgundy-900);
+  background: #fbf6ec;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
+  font-feature-settings: "kern", "liga", "dlig", "onum";
 }
 
-/* Scroll-in animations */
+/* Accessible focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-cream-600);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Smooth transitions baseline (Trust & Authority: 150-300ms) */
+a, button, summary, input, textarea, select {
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   SCROLL-IN ANIMATIONS
+   Variants via [data-mode="..."]:
+     (default)  fade-up     — subtle rise (most content)
+     down       fade-down   — drop from top (chips, badges)
+     left       slide-left  — enter from left (images, photos)
+     right      slide-right — enter from right (text blocks)
+     scale      scale-in    — zoom-in with slight blur (hero photos)
+     rise       hero-rise   — big rise + scale (h1, section titles)
+     draw       draw-x      — horizontal reveal (lines, top bars)
+     soft       soft-fade   — pure opacity (decorative frames)
+   ============================================================ */
+
 [data-animate] {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
 }
+[data-animate][data-mode="down"]  { transform: translateY(-24px); }
+[data-animate][data-mode="left"]  { transform: translateX(-48px); }
+[data-animate][data-mode="right"] { transform: translateX(48px); }
+[data-animate][data-mode="scale"] { transform: scale(0.92); filter: blur(6px); }
+[data-animate][data-mode="rise"]  { transform: translateY(56px) scale(0.97); }
+[data-animate][data-mode="soft"]  { transform: none; }
+[data-animate][data-mode="draw"]  {
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 1;
+  transition: transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 [data-animate].in-view {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+  filter: none;
 }
+
 [data-animate-delay="1"] { transition-delay: 0.08s; }
 [data-animate-delay="2"] { transition-delay: 0.16s; }
 [data-animate-delay="3"] { transition-delay: 0.24s; }
-[data-animate-delay="4"] { transition-delay: 0.32s; }
-[data-animate-delay="5"] { transition-delay: 0.4s; }
+[data-animate-delay="4"] { transition-delay: 0.34s; }
+[data-animate-delay="5"] { transition-delay: 0.44s; }
+[data-animate-delay="6"] { transition-delay: 0.54s; }
+[data-animate-delay="7"] { transition-delay: 0.64s; }
+[data-animate-delay="8"] { transition-delay: 0.74s; }
+
+/* Stat counter — gentle pop on reveal */
+@keyframes statPop {
+  0%   { transform: translateY(14px) scale(0.88); opacity: 0; }
+  55%  { transform: translateY(-2px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(0) scale(1);        opacity: 1; }
+}
+[data-counter].in-view {
+  animation: statPop 0.95s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+/* Star rating — draw stars one by one when parent enters view */
+[data-stars] > * {
+  opacity: 0;
+  transform: scale(0.4) rotate(-14deg);
+  transition: opacity 0.45s ease,
+              transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+[data-stars].in-view > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+[data-stars].in-view > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.15s; }
+[data-stars].in-view > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.25s; }
+[data-stars].in-view > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.35s; }
+[data-stars].in-view > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.45s; }
+
+/* Watermark drift — slow always-on for hero "Amd" */
+@keyframes watermarkDrift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%      { transform: translate(-12px, 8px) rotate(0.6deg); }
+}
+.watermark-drift {
+  animation: watermarkDrift 18s ease-in-out infinite;
+}
+
+/* Floating badge — soft shimmer glow on hero CTA card */
+@keyframes badgeShimmer {
+  0%, 100% { box-shadow: 0 10px 30px -8px rgba(56, 9, 13, 0.45), 0 0 0 0 rgba(235, 213, 175, 0); }
+  50%      { box-shadow: 0 18px 40px -6px rgba(56, 9, 13, 0.55), 0 0 0 6px rgba(235, 213, 175, 0.08); }
+}
+.badge-shimmer {
+  animation: badgeShimmer 3.6s ease-in-out infinite;
+}
+
+/* Connector line for proceso — draws left to right */
+.connector-line {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+.connector-line.in-view {
+  transform: scaleX(1);
+}
+
+/* Icon nudge (subtle pulse on enter for credentials strip) */
+@keyframes iconPulse {
+  0%   { transform: scale(0.6); opacity: 0; }
+  60%  { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+[data-icon-pulse].in-view {
+  animation: iconPulse 0.7s cubic-bezier(0.2, 1.2, 0.3, 1) both;
+}
+
+/* Soft hover lift shared by cards */
+.lift-on-hover {
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 350ms ease,
+              border-color 250ms ease;
+}
+.lift-on-hover:hover {
+  transform: translateY(-6px);
+}
+
+/* Icon rotate on service card hover */
+.group:hover .icon-tilt {
+  transform: rotate(-8deg) scale(1.08);
+}
+.icon-tilt {
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
 @media (prefers-reduced-motion: reduce) {
-  [data-animate] {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  html { scroll-behavior: auto; }
+  [data-animate],
+  [data-animate][data-mode],
+  [data-counter].in-view,
+  [data-stars] > *,
+  [data-icon-pulse],
+  .connector-line,
+  .watermark-drift,
+  .badge-shimmer,
+  .lift-on-hover,
+  .icon-tilt {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    filter: none !important;
   }
 }

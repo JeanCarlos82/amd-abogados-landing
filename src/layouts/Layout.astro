@@ -1,13 +1,15 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 interface Props {
   title?: string;
   description?: string;
 }
 const {
-  title = 'Abril Martínez Decena — Abogada de Extranjería en Zaragoza | AMD Abogados',
-  description = 'Abril Martínez Decena, abogada especializada en extranjería en Zaragoza. Arraigo, NIE, nacionalidad, reagrupación familiar y recursos. Primera consulta gratuita.',
+  title = 'Abril Martínez Decena — Abogada en Zaragoza | Extranjería, Penal y Familia',
+  description = 'Abril Martínez Decena, abogada colegiada en REICAZ nº 7237. Atiendo casos de extranjería, derecho penal y derecho de familia en Zaragoza y toda España, en español y francés. También doy clases de preparación CCSE y DELE. Conozco la extranjería desde dentro. Cita previa.',
 } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!doctype html>
 <html lang="es">
@@ -18,39 +20,140 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/abogada.jpg" />
+    <meta property="og:image" content="/og-image.jpg" />
     <meta property="og:locale" content="es_ES" />
+    <meta property="og:url" content={canonical} />
+    <link rel="canonical" href={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/abogada.jpg" />
-    <meta name="theme-color" content="#152038" />
+    <meta name="twitter:image" content="/og-image.jpg" />
+    <meta name="theme-color" content="#4d1519" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=EB+Garamond:wght@400;500;600;700&family=Allura&display=swap" rel="stylesheet" />
     <title>{title}</title>
+    <ClientRouter />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Attorney",
+      "@type": ["Attorney", "LegalService", "LocalBusiness"],
+      "@id": "https://amd-abogados.vercel.app/#abril-martinez-decena",
       "name": "Abril Martínez Decena — AMD Abogados",
+      "legalName": "Abril Martínez Decena",
       "description": description,
-      "areaServed": "Zaragoza, Aragón, España",
+      "url": "https://amd-abogados.vercel.app",
+      "image": "https://amd-abogados.vercel.app/og-image.jpg",
+      "logo": "https://amd-abogados.vercel.app/favicon.svg",
+      "areaServed": [
+        { "@type": "City", "name": "Zaragoza" },
+        { "@type": "State", "name": "Aragón" },
+        { "@type": "Country", "name": "España" }
+      ],
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Paseo de la Independencia 00",
+        "streetAddress": "C/ Coso 77, principal izquierda",
         "addressLocality": "Zaragoza",
         "addressRegion": "Aragón",
         "postalCode": "50001",
         "addressCountry": "ES"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.6520,
+        "longitude": -0.8809
+      },
       "telephone": "+34 653 41 30 88",
-      "email": "amartinezabogada@hotmail.com",
+      "email": "abrilmartinez@reicaz.com",
       "sameAs": ["https://instagram.com/abrilmartinezabogada"],
-      "priceRange": "€€"
+      "priceRange": "€€",
+      "knowsLanguage": ["es", "fr"],
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Real e Ilustre Colegio de Abogados de Zaragoza (REICAZ)"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "09:30",
+          "closes": "13:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "16:30",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Friday"],
+          "opens": "09:30",
+          "closes": "13:30"
+        }
+      ],
+      "makesOffer": [
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Arraigo social, laboral, familiar y por formación" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Regularización extraordinaria" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Obtención y renovación de NIE y TIE" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Nacionalidad española por residencia, matrimonio u origen" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Recursos contra denegaciones de nacionalidad" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Recursos por retraso en la concesión de nacionalidad" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Reagrupación familiar" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Recursos ante denegaciones administrativas en extranjería" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Derecho penal: defensa, asistencia al detenido y acusación particular" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Derecho de familia: divorcios, custodias y pensiones alimenticias" } },
+        { "@type": "Offer", "itemOffered": { "@type": "LegalService", "name": "Modificación de medidas y procedimientos de familia" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Clases de preparación para los exámenes CCSE y DELE de nacionalidad española" } }
+      ]
     })} />
   </head>
   <body>
+    <!-- Scroll progress bar -->
+    <div
+      id="scroll-progress"
+      aria-hidden="true"
+      class="fixed top-0 left-0 right-0 z-[70] h-[3px] bg-transparent pointer-events-none"
+    >
+      <div
+        id="scroll-progress-fill"
+        class="h-full bg-gradient-to-r from-cream-400 via-cream-300 to-cream-500 origin-left"
+        style="transform: scaleX(0); will-change: transform;"
+      ></div>
+    </div>
+
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-burgundy-900 focus:text-cream-300 focus:px-5 focus:py-3 focus:rounded-full focus:font-semibold focus:shadow-2xl focus:outline focus:outline-2 focus:outline-cream-600"
+    >
+      Saltar al contenido principal
+    </a>
     <slot />
+
+    <script is:inline>
+      (function () {
+        const fill = document.getElementById('scroll-progress-fill');
+        if (!fill) return;
+        let ticking = false;
+        const update = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const progress = max > 0 ? h.scrollTop / max : 0;
+          fill.style.transform = 'scaleX(' + progress + ')';
+          ticking = false;
+        };
+        const onScroll = () => {
+          if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+          }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        document.addEventListener('astro:after-swap', update);
+        update();
+      })();
+    </script>
   </body>
 </html>

@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+---
+<Layout
+  title="Página no encontrada — AMD Abogados"
+  description="Esta página no existe en el archivo de AMD Abogados. Vuelve al inicio para seguir navegando."
+>
+  <main id="main" class="relative min-h-[100svh] bg-burgundy-900 text-white overflow-hidden flex items-center">
+    <!-- Watermark caligráfico detrás -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center select-none">
+      <span class="font-logo text-[20rem] md:text-[32rem] leading-none text-cream-300/5 watermark-drift">404</span>
+    </div>
+    <!-- Gradiente radial suave -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_theme(colors.burgundy.800)_0%,_transparent_55%)]"></div>
+
+    <div class="relative max-w-2xl mx-auto px-6 py-24 text-center">
+      <div data-animate data-mode="down" class="inline-flex items-center gap-2 bg-cream-300/10 text-cream-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-2 rounded-full mb-8 border border-cream-300/20">
+        <Icon name="file-text" size={14} />
+        Error 404
+      </div>
+
+      <h1 data-animate data-mode="rise" data-animate-delay="1" class="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight mb-6">
+        Este expediente<br/><span class="text-cream-300">no existe en mi archivo.</span>
+      </h1>
+
+      <p data-animate data-animate-delay="2" class="text-lg md:text-xl text-cream-100/80 mb-10 leading-relaxed max-w-xl mx-auto">
+        La página que buscas se ha traspapelado o nunca llegó a presentarse. Pero no te preocupes — volver al inicio es tan fácil como pulsar aquí abajo.
+      </p>
+
+      <div data-animate data-animate-delay="3" class="flex flex-wrap justify-center gap-4">
+        <a href="/" class="group inline-flex items-center gap-2 bg-cream-300 hover:bg-cream-200 text-burgundy-900 font-semibold px-8 py-4 rounded-full shadow-xl shadow-burgundy-950/40 transition hover:-translate-y-0.5">
+          <Icon name="arrow-right" size={18} class="rotate-180" />
+          Volver al inicio
+        </a>
+        <a href="/#contacto" class="inline-flex items-center gap-2 border-2 border-cream-300/40 text-cream-100 hover:bg-cream-300/10 hover:border-cream-300 font-semibold px-8 py-4 rounded-full transition hover:-translate-y-0.5">
+          <Icon name="mail" size={18} />
+          Contactar con Abril
+        </a>
+      </div>
+
+      <div data-animate data-animate-delay="4" class="mt-16 pt-8 border-t border-cream-300/15 text-sm text-cream-100/70">
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <Icon name="shield-check" size={14} class="text-cream-300" />
+          <span>Abril Martínez Decena · Abogada colegiada en REICAZ</span>
+        </div>
+        <div>Derecho de extranjería · Zaragoza</div>
+      </div>
+    </div>
+  </main>
+</Layout>

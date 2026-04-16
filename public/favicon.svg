@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="18" fill="#152038"/>
-  <text x="50" y="62" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#c9a15a" text-anchor="middle" letter-spacing="-1">AMD</text>
-  <line x1="22" y1="75" x2="78" y2="75" stroke="#c9a15a" stroke-width="2" opacity="0.6"/>
+  <rect width="100" height="100" rx="18" fill="#38090d"/>
+  <text x="50" y="66" font-family="'Allura', 'Dancing Script', cursive" font-size="58" font-weight="400" fill="#ebd5af" text-anchor="middle" font-style="italic">Amd</text>
+  <line x1="22" y1="80" x2="78" y2="80" stroke="#ebd5af" stroke-width="2" opacity="0.55"/>
 </svg>

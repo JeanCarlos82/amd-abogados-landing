@@ -1,28 +1,23 @@
 ---
 import Layout from './Layout.astro';
+import Nav from '../components/Nav.astro';
 interface Props {
   title: string;
+  description?: string;
 }
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
-<Layout title={`${title} — AMD Abogados`}>
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-navy-100">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="font-serif text-xl font-bold text-navy-900 tracking-wider">
-        AMD <span class="text-gold-500 font-normal">|</span> <span class="text-sm font-sans font-medium tracking-widest uppercase">Abogados</span>
-      </a>
-      <a href="/" class="text-sm font-medium text-navy-700 hover:text-gold-500 transition">← Volver al inicio</a>
-    </div>
-  </header>
+<Layout title={`${title} — AMD Abogados`} description={description}>
+  <Nav overHero={false} />
 
-  <main class="max-w-3xl mx-auto px-6 py-16">
-    <h1 class="font-serif text-4xl md:text-5xl font-bold text-navy-900 mb-8 pb-4 border-b-2 border-gold-400">{title}</h1>
-    <div class="prose-legal text-navy-700 leading-relaxed space-y-4">
+  <main id="main" class="max-w-3xl mx-auto px-6 pt-32 md:pt-36 pb-16">
+    <h1 class="font-serif text-4xl md:text-5xl font-bold text-burgundy-900 mb-8 pb-4 border-b-2 border-cream-400">{title}</h1>
+    <div class="prose-legal text-burgundy-700 leading-relaxed space-y-4">
       <slot />
     </div>
   </main>
 
-  <footer class="bg-navy-900 text-white/60 border-t border-white/10 mt-16">
+  <footer class="bg-burgundy-900 text-cream-100/80 border-t border-cream-300/10 mt-16">
     <div class="max-w-6xl mx-auto px-6 py-8 text-center text-xs">
       © {new Date().getFullYear()} Abril Martínez Decena · AMD Abogados · Todos los derechos reservados
     </div>
@@ -33,20 +28,20 @@ const { title } = Astro.props;
   .prose-legal h2 {
     font-family: var(--font-serif);
     font-size: 1.5rem;
-    color: var(--color-navy-900);
+    color: var(--color-burgundy-900);
     margin-top: 2rem;
     margin-bottom: 0.75rem;
   }
   .prose-legal h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--color-navy-800);
+    color: var(--color-burgundy-800);
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
   }
   .prose-legal p { margin-bottom: 1rem; }
   .prose-legal ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
   .prose-legal li { margin-bottom: 0.25rem; }
-  .prose-legal strong { color: var(--color-navy-900); }
-  .prose-legal a { color: var(--color-gold-600); text-decoration: underline; }
+  .prose-legal strong { color: var(--color-burgundy-900); }
+  .prose-legal a { color: var(--color-cream-600); text-decoration: underline; }
 </style>

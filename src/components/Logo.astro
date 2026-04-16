@@ -1,0 +1,56 @@
+---
+interface Props {
+  variant?: 'dark' | 'light';
+  showTagline?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+}
+const { variant = 'dark', showTagline = true, size = 'md' } = Astro.props;
+
+const scriptColor = variant === 'dark' ? 'text-cream-300' : 'text-burgundy-800';
+const taglineColor = variant === 'dark' ? 'text-cream-300/90' : 'text-burgundy-800';
+const strokeColor = variant === 'dark' ? '#ebd5af' : '#4d1519';
+
+const scriptSize = size === 'sm' ? 'text-4xl' : size === 'lg' ? 'text-7xl' : 'text-5xl';
+const iconSize = size === 'sm' ? 22 : size === 'lg' ? 44 : 30;
+const taglineMain = size === 'sm' ? 'text-[10px]' : size === 'lg' ? 'text-base' : 'text-xs';
+const taglineSub = size === 'sm' ? 'text-[8px]' : size === 'lg' ? 'text-sm' : 'text-[10px]';
+---
+<div class="inline-flex items-end gap-1 leading-none select-none">
+  <span class={`font-logo ${scriptSize} ${scriptColor} leading-[0.85] pr-1`} aria-hidden="true">Amd</span>
+  <svg
+    width={iconSize}
+    height={iconSize}
+    viewBox="0 0 64 64"
+    fill="none"
+    stroke={strokeColor}
+    stroke-width="2.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="shrink-0 -mb-1"
+    aria-hidden="true"
+  >
+    <!-- columna central -->
+    <line x1="32" y1="10" x2="32" y2="54" />
+    <line x1="26" y1="54" x2="38" y2="54" />
+    <line x1="24" y1="10" x2="40" y2="10" />
+    <!-- brazo horizontal -->
+    <line x1="14" y1="18" x2="50" y2="18" />
+    <!-- cuerdas -->
+    <line x1="14" y1="18" x2="14" y2="28" />
+    <line x1="50" y1="18" x2="50" y2="28" />
+    <!-- platillo izquierdo -->
+    <path d="M7 28 Q14 40 21 28" />
+    <!-- platillo derecho -->
+    <path d="M43 28 Q50 40 57 28" />
+  </svg>
+  {showTagline && (
+    <div class="flex flex-col ml-2 pb-1.5">
+      <span class={`font-sans font-semibold tracking-wide ${taglineMain} ${taglineColor} uppercase`}>
+        Abril Martínez Decena
+      </span>
+      <span class={`font-sans ${taglineSub} ${taglineColor} tracking-widest uppercase opacity-80`}>
+        Abogada
+      </span>
+    </div>
+  )}
+</div>

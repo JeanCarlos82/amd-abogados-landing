@@ -1,257 +1,421 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
+import Logo from '../components/Logo.astro';
+import Nav from '../components/Nav.astro';
 import CookieBanner from '../components/CookieBanner.astro';
+import abogadaImg from '../assets/abogada.jpg';
 
-const servicios = [
-  { icon: 'file-text', title: 'Arraigo', desc: 'Social, laboral, familiar y por formación. Te guío en cada requisito.' },
-  { icon: 'id-card', title: 'NIE y TIE', desc: 'Obtención, renovación y modificación de tu documentación de residencia.' },
-  { icon: 'globe', title: 'Nacionalidad española', desc: 'Por residencia, matrimonio u origen. Preparación completa del expediente.' },
-  { icon: 'users', title: 'Reagrupación familiar', desc: 'Reúne a tu familia en España con garantías jurídicas.' },
-  { icon: 'briefcase', title: 'Residencia y trabajo', desc: 'Autorizaciones iniciales, renovaciones y modificaciones de residencia.' },
-  { icon: 'scale', title: 'Recursos y denegaciones', desc: 'Recurrimos resoluciones desfavorables ante la Administración y los tribunales.' },
+const areas = [
+  {
+    icon: 'globe',
+    title: 'Extranjería',
+    lead: 'Para personas migrantes y sus familias que quieren construir su vida en España con garantías.',
+    items: [
+      'Arraigo social, laboral, familiar y por formación',
+      'Regularización extraordinaria',
+      'NIE y TIE: obtención, renovación y modificación',
+      'Nacionalidad por residencia, matrimonio u origen',
+      'Recursos contra denegaciones de nacionalidad',
+      'Recursos por retraso de nacionalidad',
+      'Reagrupación familiar',
+      'Residencia y autorizaciones de trabajo',
+      'Recursos contra denegaciones administrativas',
+      'Clases de preparación CCSE y DELE',
+    ],
+  },
+  {
+    icon: 'scale',
+    title: 'Derecho penal',
+    lead: 'Defensa y asistencia en procedimientos penales, desde la detención hasta el juicio.',
+    items: [
+      'Asistencia al detenido en comisaría y juzgado',
+      'Defensa en procedimientos abreviados y ordinarios',
+      'Acusación particular como víctima',
+      'Recursos ante audiencias y tribunales superiores',
+    ],
+  },
+  {
+    icon: 'users',
+    title: 'Derecho de familia',
+    lead: 'Procesos familiares con enfoque práctico y sensibilidad humana en cada paso.',
+    items: [
+      'Divorcios contenciosos y de mutuo acuerdo',
+      'Custodia de menores y régimen de visitas',
+      'Pensiones alimenticias y compensatorias',
+      'Modificación de medidas definitivas',
+    ],
+  },
 ];
 
 const pasos = [
-  { n: '01', t: 'Consulta inicial gratuita', d: 'Hablamos 15 minutos por teléfono o WhatsApp para entender tu situación.' },
+  { n: '01', t: 'Hablamos primero', d: 'Una primera conversación con cita previa para entender tu situación, plazos y opciones reales.' },
   { n: '02', t: 'Análisis de tu caso', d: 'Estudio tu documentación y te explico con claridad tus opciones y plazos.' },
   { n: '03', t: 'Gestión del trámite', d: 'Preparo y presento el expediente, y te mantengo informado en todo momento.' },
   { n: '04', t: 'Resolución favorable', d: 'Te acompaño hasta obtener la respuesta de la Administración.' },
 ];
 
-const testimonios = [
-  { nombre: 'Carlos M.', pais: 'Colombia', caso: 'Arraigo social', texto: 'Abril me ayudó a conseguir mi arraigo después de que me lo habían denegado. Explicación clara, trato cercano y todo salió adelante.' },
-  { nombre: 'Fatima E.', pais: 'Marruecos', caso: 'Reagrupación familiar', texto: 'Gracias a su trabajo pude traer a mis hijos a Zaragoza. Siempre estuvo disponible para resolver mis dudas.' },
-  { nombre: 'Andrés R.', pais: 'Venezuela', caso: 'Nacionalidad', texto: 'Llevaba años intentándolo sin éxito. Con Abril conseguí la nacionalidad española en menos de un año.' },
+const principios = [
+  {
+    icon: 'shield-check',
+    titulo: 'Te digo las cosas como son',
+    texto: 'Soy directa y cercana. Te explico tu situación en lenguaje claro, sin jerga jurídica innecesaria, y respondo cuantas dudas tengas. Si la respuesta no te va a gustar, te la doy igual — porque mereces saberla.',
+  },
+  {
+    icon: 'scale',
+    titulo: 'Solo cojo casos viables',
+    texto: 'Si no veo viabilidad real en tu asunto, te lo digo el primer día y no lo llevo. No trabajo con clientes para ganar dinero a costa de un trámite que va a salir mal. Trabajo solo con casos en los que sé que puedo ayudarte de verdad.',
+  },
+  {
+    icon: 'lock',
+    titulo: 'Cuando presento, presento bien',
+    texto: 'Si elijo una vía es porque le he dado muchas vueltas a todas las opciones. No experimento con tu expediente. Cuando lo presento, lo hago porque sé que es la estrategia correcta para tu caso — y eso lo nota la Administración.',
+  },
 ];
 
 const faq = [
-  { q: '¿Cuánto cuesta la primera consulta?', a: 'La primera consulta de 15 minutos es totalmente gratuita y sin compromiso. Puede ser presencial en mi despacho de Zaragoza, por teléfono o WhatsApp.' },
-  { q: '¿Cuánto tarda un trámite de arraigo?', a: 'Los plazos varían según el tipo de arraigo y la carga de trabajo de la Oficina de Extranjería. De media, entre 3 y 6 meses desde la presentación del expediente.' },
-  { q: '¿Y si ya me han denegado un trámite?', a: 'Una denegación no es el final. En muchos casos es posible presentar un recurso de reposición o contencioso-administrativo. Analizamos tu caso y te indico si hay opciones reales de éxito.' },
-  { q: '¿Atiendes a clientes fuera de Zaragoza?', a: 'Sí. Trabajo con clientes de toda España mediante videollamada y gestión telemática. La documentación se puede enviar de forma segura.' },
-  { q: '¿En qué idiomas atiendes?', a: 'Español, inglés y francés. Para otros idiomas podemos coordinar intérprete.' },
-  { q: '¿Cómo se garantiza la confidencialidad?', a: 'Toda la información que me facilitas está protegida por el secreto profesional del abogado, regulado en el Estatuto de la Abogacía Española.' },
+  {
+    q: '¿Cómo es la primera consulta?',
+    a: 'Es un análisis real de tu situación, no una llamada de ventas. Ahí te digo si tu caso es viable, qué opciones tienes, los plazos reales y el precio exacto del trámite. Puede ser presencial en mi despacho de Zaragoza con cita previa, o por videollamada si estás fuera.',
+  },
+  {
+    q: '¿Cuánto cuesta un trámite?',
+    a: 'Cada caso se valora individualmente — la complejidad del expediente determina el precio final. En la primera consulta te lo digo exactamente, antes de que decidas nada. Si vienes en familia ajusto por unidad familiar, no por persona; me parece más justo.',
+  },
+  {
+    q: '¿Cuánto tarda la Administración en responder?',
+    a: 'Depende del tipo de trámite y de la oficina que lo gestiona. Los arraigos suelen resolverse en 3-6 meses; las nacionalidades pueden tardar de 1 a 3 años. En la consulta te doy una estimación realista para tu caso concreto, no una promesa vacía.',
+  },
+  {
+    q: '¿Puedo viajar mientras mi expediente está en trámite?',
+    a: 'Es una de las preguntas que más me hacen y la respuesta depende del tipo de trámite, de tu situación documental y de a dónde quieras viajar. En algunos casos sí, en otros puede comprometer el expediente. Lo vemos en la primera consulta antes de que reserves nada.',
+  },
+  {
+    q: '¿Cómo sabes si mi caso va a salir bien?',
+    a: 'Antes de aceptar un caso lo estudio a fondo: documentación, antecedentes, normativa aplicable. Si no veo viabilidad real, te lo digo el primer día y no llevo el caso. No trabajo con expedientes que sé que van a salir mal — ni por dinero. Si te confirmo que tu caso es viable, es porque he valorado todas las opciones y sé cuál es la vía correcta.',
+  },
+  {
+    q: '¿Atiendes a clientes fuera de Zaragoza?',
+    a: 'Sí. Puedo presentar trámites en toda España. Los clientes de fuera me contactan por teléfono y concertamos una cita virtual (llamada o videollamada) para hacer la consulta inicial. Toda la documentación se gestiona de forma segura.',
+  },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
 ---
 <Layout>
-  <!-- NAV -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-navy-100">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="font-serif text-xl font-bold text-navy-900 tracking-wider">
-        AMD <span class="text-gold-500 font-normal">|</span> <span class="text-sm font-sans font-medium tracking-widest uppercase">Abogados</span>
-      </a>
-      <nav class="hidden md:flex gap-8 text-sm font-medium text-navy-700">
-        <a href="#servicios" class="hover:text-gold-500 transition">Servicios</a>
-        <a href="#sobre-mi" class="hover:text-gold-500 transition">Sobre mí</a>
-        <a href="#proceso" class="hover:text-gold-500 transition">Proceso</a>
-        <a href="#testimonios" class="hover:text-gold-500 transition">Testimonios</a>
-        <a href="#faq" class="hover:text-gold-500 transition">FAQ</a>
-      </nav>
-      <a href="#contacto" class="hidden sm:inline-flex bg-navy-800 hover:bg-navy-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition">
-        Consulta gratis
-      </a>
-      <button id="mobile-menu-toggle" class="md:hidden text-navy-900 p-2" aria-label="Abrir menú">
-        <Icon name="menu" size={24} />
-      </button>
-    </div>
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="md:hidden hidden border-t border-navy-100 bg-white">
-      <nav class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1 text-navy-700 font-medium">
-        <a href="#servicios" class="py-3 border-b border-navy-100 hover:text-gold-500">Servicios</a>
-        <a href="#sobre-mi" class="py-3 border-b border-navy-100 hover:text-gold-500">Sobre mí</a>
-        <a href="#proceso" class="py-3 border-b border-navy-100 hover:text-gold-500">Proceso</a>
-        <a href="#testimonios" class="py-3 border-b border-navy-100 hover:text-gold-500">Testimonios</a>
-        <a href="#faq" class="py-3 border-b border-navy-100 hover:text-gold-500">FAQ</a>
-        <a href="#contacto" class="mt-4 mb-2 bg-navy-800 text-white text-center py-3 rounded-full font-semibold">Consulta gratis</a>
-      </nav>
-    </div>
-  </header>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+  <Nav overHero={true} />
 
+  <main id="main">
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-navy-50 via-white to-navy-50">
-    <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+  <section class="relative overflow-hidden bg-burgundy-900 text-white">
+    <!-- Watermark caligráfico "Amd" con drift lento permanente -->
+    <div aria-hidden="true" class="pointer-events-none absolute -right-16 -top-10 md:-right-24 md:-top-16 select-none font-logo text-[18rem] md:text-[26rem] leading-none text-cream-300/5 watermark-drift">Amd</div>
+    <!-- Gradiente radial suave -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_theme(colors.burgundy.800)_0%,_transparent_60%)]"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 py-24 md:py-32 grid md:grid-cols-[1.1fr_1fr] gap-12 md:gap-16 items-center">
       <div>
-        <div data-animate class="inline-flex items-center gap-2 bg-gold-400/15 text-gold-600 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full mb-6">
-          <span class="w-1.5 h-1.5 bg-gold-500 rounded-full"></span>
-          Abogada colegiada · ICAZ Zaragoza
+        <div data-animate data-mode="down" class="inline-flex items-center gap-2 bg-cream-300/10 text-cream-300 text-xs font-semibold uppercase tracking-[0.15em] px-4 py-2 rounded-full mb-8 border border-cream-300/20">
+          <span class="w-1.5 h-1.5 bg-cream-300 rounded-full animate-pulse"></span>
+          Abogada colegiada · REICAZ
         </div>
-        <h1 data-animate data-animate-delay="1" class="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 leading-[1.1] mb-6">
-          Tu situación legal en España <span class="text-gold-500">tiene solución</span>
+        <h1 data-animate data-mode="rise" data-animate-delay="1" class="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.02] tracking-tight mb-8">
+          Tu situación legal<br/>
+          <span class="text-cream-300">tiene solución.</span>
         </h1>
-        <p data-animate data-animate-delay="2" class="text-lg text-navy-700 mb-8 leading-relaxed max-w-lg">
-          Soy <strong>Abril Martínez Decena</strong>, abogada especializada en <strong>derecho de extranjería</strong> en Zaragoza.
-          Arraigo, NIE, nacionalidad, reagrupación familiar y recursos — con trato cercano y explicaciones claras.
+        <p data-animate data-animate-delay="2" class="text-lg md:text-xl text-cream-100/80 mb-10 leading-relaxed max-w-xl">
+          Soy <strong class="text-white font-semibold">Abril Martínez Decena</strong>, abogada en Zaragoza especializada en <strong class="text-white font-semibold">extranjería, derecho penal y derecho de familia</strong>. Atiendo en toda España, en español o francés. Te digo las cosas como son y solo cojo casos en los que sé que puedo ayudarte de verdad.
         </p>
         <div data-animate data-animate-delay="3" class="flex flex-wrap gap-4 mb-10">
-          <a href="#contacto" class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-7 py-4 rounded-full transition shadow-lg shadow-navy-900/10">
-            Agendar consulta gratis
-            <Icon name="arrow-right" size={18} />
+          <a href="#contacto" class="group inline-flex items-center gap-2 bg-cream-300 hover:bg-cream-200 text-burgundy-900 font-semibold px-8 py-4 rounded-full shadow-xl shadow-burgundy-950/40 transition hover:-translate-y-0.5">
+            Hablar con Abril
+            <Icon name="arrow-right" size={18} class="group-hover:translate-x-1 transition-transform" />
           </a>
-          <a href="tel:+34653413088" class="inline-flex items-center gap-2 border-2 border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white font-semibold px-7 py-4 rounded-full transition">
+          <a href="tel:+34653413088" class="inline-flex items-center gap-2 border-2 border-cream-300/40 text-cream-100 hover:bg-cream-300/10 hover:border-cream-300 font-semibold px-8 py-4 rounded-full transition hover:-translate-y-0.5">
             <Icon name="phone" size={18} />
             653 41 30 88
           </a>
         </div>
-        <div data-animate data-animate-delay="4" class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-navy-700">
-          <div class="flex items-center gap-2">
-            <span class="flex text-gold-500">
-              <Icon name="star" size={14} class="fill-current" />
-              <Icon name="star" size={14} class="fill-current" />
-              <Icon name="star" size={14} class="fill-current" />
-              <Icon name="star" size={14} class="fill-current" />
-              <Icon name="star" size={14} class="fill-current" />
-            </span>
-            4.9/5 en Google
-          </div>
-          <div class="flex items-center gap-2"><Icon name="check" size={16} class="text-gold-500" /> 10+ años de experiencia</div>
-          <div class="flex items-center gap-2"><Icon name="check" size={16} class="text-gold-500" /> 500+ casos resueltos</div>
+        <div data-animate data-animate-delay="4" class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-cream-100/80 pt-6 border-t border-cream-300/15">
+          <div class="flex items-center gap-2"><Icon name="shield-check" size={16} class="text-cream-300" /> Colegiada REICAZ nº 7237</div>
+          <div class="flex items-center gap-2"><Icon name="check" size={16} class="text-cream-300" /> Extranjería · Penal · Familia</div>
+          <div class="flex items-center gap-2"><Icon name="check" size={16} class="text-cream-300" /> Atiendo en español y francés</div>
         </div>
       </div>
-      <div class="relative" data-animate data-animate-delay="2">
-        <div class="absolute -inset-4 bg-gold-400/10 rounded-3xl rotate-3"></div>
-        <div class="relative aspect-[4/5] rounded-2xl shadow-2xl overflow-hidden bg-navy-100 ring-4 ring-white">
-          <img src="/abogada.jpg" alt="Abril Martínez Decena, abogada de extranjería en Zaragoza" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/30 via-transparent to-transparent"></div>
-          <div class="absolute bottom-4 left-4 right-4 text-white">
-            <div class="font-serif text-lg font-bold">Abril Martínez Decena</div>
-            <div class="text-xs text-white/80">Abogada · ICAZ Zaragoza</div>
+
+      <!-- Retrato tipo ficha -->
+      <div class="relative mx-auto max-w-sm md:max-w-none" data-animate data-mode="scale" data-animate-delay="2">
+        <!-- Marco decorativo cream -->
+        <div aria-hidden="true" class="absolute -inset-3 md:-inset-4 border border-cream-300/30 rounded-3xl rotate-2"></div>
+        <div aria-hidden="true" class="absolute -inset-1.5 md:-inset-2 border border-cream-300/50 rounded-3xl -rotate-1"></div>
+
+        <div class="relative aspect-[4/5] rounded-2xl shadow-2xl shadow-burgundy-950/60 overflow-hidden bg-burgundy-800 ring-1 ring-cream-300/20">
+          <Image
+            src={abogadaImg}
+            alt="Abril Martínez Decena, abogada de extranjería en Zaragoza"
+            widths={[400, 640, 800, 1000]}
+            sizes="(max-width: 768px) 90vw, 40vw"
+            format="webp"
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-burgundy-950/90 via-burgundy-950/30 to-transparent"></div>
+          <!-- Ficha tipo expediente -->
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-white font-semibold pb-4 mb-4 border-b border-cream-300/25 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">Abogada colegiada · REICAZ 7237</div>
+            <div class="font-serif text-2xl font-semibold leading-tight">Abril Martínez<br/>Decena</div>
           </div>
         </div>
-        <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl px-5 py-4 border border-navy-100">
-          <div class="text-2xl font-bold text-navy-900">500+</div>
-          <div class="text-xs text-navy-700">Casos resueltos</div>
+
+        <!-- Floating trust badge con shimmer permanente -->
+        <div class="absolute -bottom-6 -left-4 md:-left-8 bg-cream-50 rounded-xl px-5 py-4 border border-cream-200 flex items-center gap-4 badge-shimmer">
+          <div class="w-10 h-10 rounded-full bg-burgundy-800 flex items-center justify-center text-cream-300 shrink-0">
+            <Icon name="award" size={20} />
+          </div>
+          <div>
+            <div class="text-xl font-serif font-bold text-burgundy-900 leading-none">REICAZ</div>
+            <div class="text-[11px] uppercase tracking-wider text-burgundy-700/80 mt-1">Colegiada nº 7237</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TRUST BAR -->
-  <section class="bg-navy-900 text-white">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div data-animate><div class="text-3xl font-bold text-gold-400 font-serif">10+</div><div class="text-sm text-white/70 mt-1">Años ejerciendo</div></div>
-      <div data-animate data-animate-delay="1"><div class="text-3xl font-bold text-gold-400 font-serif">500+</div><div class="text-sm text-white/70 mt-1">Casos ganados</div></div>
-      <div data-animate data-animate-delay="2"><div class="text-3xl font-bold text-gold-400 font-serif">95%</div><div class="text-sm text-white/70 mt-1">Tasa de éxito</div></div>
-      <div data-animate data-animate-delay="3"><div class="text-3xl font-bold text-gold-400 font-serif">3</div><div class="text-sm text-white/70 mt-1">Idiomas: ES · EN · FR</div></div>
+  <!-- TRUST BAR (stat counters) -->
+  <section class="bg-burgundy-900 text-white border-y border-cream-600/20">
+    <div class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div data-counter data-target="24" data-suffix="h">
+        <div class="text-4xl font-serif font-bold text-cream-300 tabular-nums"><span class="counter-value">0</span><span class="counter-suffix">h</span></div>
+        <div class="text-sm text-cream-100/70 mt-2 uppercase tracking-wider">Respuesta media</div>
+      </div>
+      <div data-counter data-target="100" data-suffix="%">
+        <div class="text-4xl font-serif font-bold text-cream-300 tabular-nums"><span class="counter-value">0</span><span class="counter-suffix">%</span></div>
+        <div class="text-sm text-cream-100/70 mt-2 uppercase tracking-wider">Confidencialidad</div>
+      </div>
+      <div data-counter data-target="2" data-suffix="">
+        <div class="text-4xl font-serif font-bold text-cream-300 tabular-nums"><span class="counter-value">0</span></div>
+        <div class="text-sm text-cream-100/70 mt-2 uppercase tracking-wider">Idiomas atendidos</div>
+      </div>
+      <div data-counter data-target="3" data-suffix="">
+        <div class="text-4xl font-serif font-bold text-cream-300 tabular-nums"><span class="counter-value">0</span></div>
+        <div class="text-sm text-cream-100/70 mt-2 uppercase tracking-wider">Áreas de derecho</div>
+      </div>
     </div>
   </section>
 
-  <!-- SERVICIOS -->
-  <section id="servicios" class="py-24">
+  <!-- CREDENTIALS STRIP (Trust & Authority: expose credentials prominently) -->
+  <section class="bg-cream-50 border-b border-burgundy-100">
+    <div class="max-w-6xl mx-auto px-6 py-8">
+      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 text-burgundy-800">
+        <div class="flex items-center gap-3" data-animate data-mode="right" data-animate-delay="1">
+          <span data-icon-pulse><Icon name="shield-check" size={22} class="text-cream-600 shrink-0" /></span>
+          <div>
+            <div class="text-xs uppercase tracking-wider text-burgundy-700/70">Colegiada</div>
+            <div class="text-sm font-semibold">REICAZ</div>
+          </div>
+        </div>
+        <div class="hidden md:block w-px h-10 bg-burgundy-200"></div>
+        <div class="flex items-center gap-3" data-animate data-mode="right" data-animate-delay="2">
+          <span data-icon-pulse><Icon name="scale" size={22} class="text-cream-600 shrink-0" /></span>
+          <div>
+            <div class="text-xs uppercase tracking-wider text-burgundy-700/70">Áreas</div>
+            <div class="text-sm font-semibold">Extranjería · Penal · Familia</div>
+          </div>
+        </div>
+        <div class="hidden md:block w-px h-10 bg-burgundy-200"></div>
+        <div class="flex items-center gap-3" data-animate data-mode="right" data-animate-delay="3">
+          <span data-icon-pulse><Icon name="lock" size={22} class="text-cream-600 shrink-0" /></span>
+          <div>
+            <div class="text-xs uppercase tracking-wider text-burgundy-700/70">Confidencialidad</div>
+            <div class="text-sm font-semibold">Secreto profesional</div>
+          </div>
+        </div>
+        <div class="hidden md:block w-px h-10 bg-burgundy-200"></div>
+        <div class="flex items-center gap-3" data-animate data-mode="right" data-animate-delay="4">
+          <span data-icon-pulse><Icon name="check" size={22} class="text-cream-600 shrink-0" /></span>
+          <div>
+            <div class="text-xs uppercase tracking-wider text-burgundy-700/70">Atención</div>
+            <div class="text-sm font-semibold">Solo con cita previa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS / ÁREAS DE PRÁCTICA -->
+  <section id="servicios" class="py-24 bg-white">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-14" data-animate>
-        <div class="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">Áreas de práctica</div>
-        <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-4">Trámites que gestiono</h2>
-        <p class="text-navy-700 max-w-2xl mx-auto">Asesoramiento integral en derecho de extranjería en Zaragoza y toda España.</p>
+      <div class="text-center mb-16" data-animate>
+        <div class="text-cream-600 text-xs font-semibold uppercase tracking-[0.2em] mb-4">— Áreas de práctica —</div>
+        <h2 class="font-serif text-4xl md:text-5xl font-semibold text-burgundy-900 mb-5 tracking-tight">En qué puedo ayudarte</h2>
+        <p class="text-burgundy-700 max-w-2xl mx-auto text-lg">Tres áreas del derecho con un mismo enfoque: trato cercano, claridad y rigor técnico en cada paso.</p>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {servicios.map((s, i) => (
-          <div data-animate data-animate-delay={String((i % 3) + 1)} class="group bg-white border border-navy-100 rounded-2xl p-7 hover:border-gold-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <div class="w-14 h-14 rounded-xl bg-gold-400/10 flex items-center justify-center text-gold-600 mb-5 group-hover:bg-navy-800 group-hover:text-gold-400 transition-colors">
-              <Icon name={s.icon} size={26} />
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {areas.map((a, i) => (
+          <article data-animate data-mode="rise" data-animate-delay={String(i + 1)} class="group relative flex flex-col bg-cream-50/60 rounded-2xl p-8 lg:p-9 border border-burgundy-100 hover:border-burgundy-300 lift-on-hover overflow-hidden">
+            <!-- Top accent bar -->
+            <div aria-hidden="true" class="absolute top-0 left-0 right-0 h-1 bg-burgundy-800 group-hover:bg-cream-600 transition-colors duration-300"></div>
+            <!-- Icon in circle -->
+            <div class="relative w-16 h-16 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-6 ring-1 ring-burgundy-100 group-hover:bg-burgundy-800 group-hover:text-cream-300 group-hover:ring-burgundy-800 transition-all duration-300">
+              <span class="icon-tilt inline-flex"><Icon name={a.icon} size={28} /></span>
             </div>
-            <h3 class="text-xl font-bold text-navy-900 mb-2">{s.title}</h3>
-            <p class="text-navy-700 text-sm leading-relaxed">{s.desc}</p>
-          </div>
+            <h3 class="font-serif text-2xl md:text-3xl font-semibold text-burgundy-900 mb-3 tracking-tight">{a.title}</h3>
+            <p class="text-burgundy-700 text-sm leading-relaxed mb-6 italic">{a.lead}</p>
+            <ul class="space-y-2.5 mb-8 flex-1">
+              {a.items.map((item) => (
+                <li class="flex gap-2.5 items-start text-sm text-burgundy-800">
+                  <Icon name="check" size={16} class="text-cream-600 shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="#contacto" class="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-burgundy-800 hover:text-cream-600 transition-colors">
+              Consultar mi caso
+              <Icon name="arrow-right" size={14} class="group-hover:translate-x-1 transition-transform" />
+            </a>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
   <!-- SOBRE MI -->
-  <section id="sobre-mi" class="py-24 bg-navy-50">
+  <section id="sobre-mi" class="py-24 bg-burgundy-50">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-5 gap-12 items-center">
-      <div class="md:col-span-2" data-animate>
-        <div class="aspect-square rounded-2xl shadow-xl overflow-hidden bg-navy-100 ring-4 ring-white">
-          <img src="/abogada.jpg" alt="Abril Martínez Decena" class="w-full h-full object-cover" />
+      <div class="md:col-span-2" data-animate data-mode="left">
+        <div class="aspect-square rounded-2xl shadow-xl overflow-hidden bg-burgundy-100 ring-4 ring-white">
+          <Image
+            src={abogadaImg}
+            alt="Abril Martínez Decena en su despacho"
+            widths={[300, 500, 700]}
+            sizes="(max-width: 768px) 90vw, 30vw"
+            format="webp"
+            quality={80}
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
         </div>
       </div>
-      <div class="md:col-span-3" data-animate data-animate-delay="1">
-        <div class="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">Sobre mí</div>
-        <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-6">Abril Martínez Decena</h2>
-        <p class="text-navy-700 mb-4 leading-relaxed">
-          Soy abogada especializada en derecho de extranjería y fundadora de <strong>AMD Abogados</strong> en Zaragoza.
-          Llevo años ayudando a personas migrantes y a sus familias a construir su vida en España.
+      <div class="md:col-span-3">
+        <div data-animate data-mode="right" class="text-cream-600 text-sm font-semibold uppercase tracking-wider mb-3">Sobre mí</div>
+        <h2 data-animate data-mode="right" data-animate-delay="1" class="font-serif text-4xl md:text-5xl font-semibold text-burgundy-900 mb-6 tracking-tight">Soy Abril. Y entiendo lo que estás viviendo.</h2>
+
+        <p data-animate data-mode="right" data-animate-delay="2" class="text-burgundy-700 mb-5 leading-relaxed text-lg">
+          Llegar a un país nuevo, llenar formularios en un idioma que no es el tuyo, esperar meses una respuesta que no llega, escuchar versiones distintas dependiendo de a quién preguntes, sentir que tu vida entera depende de un papel sellado. Si has llegado hasta aquí buscando una abogada, lo más probable es que estés <strong>cansado, asustado, o las dos cosas a la vez</strong>.
         </p>
-        <p class="text-navy-700 mb-6 leading-relaxed">
-          Sé que un trámite de extranjería no es solo un papel: es tu futuro, el de tu familia y el de tus hijos.
-          Por eso trabajo con <strong>transparencia, cercanía y rigor técnico</strong>. Te explico en un lenguaje claro
-          qué opciones tienes, cuánto tardará y cuánto costará. Sin letra pequeña.
+
+        <p data-animate data-mode="right" data-animate-delay="3" class="text-burgundy-700 mb-5 leading-relaxed text-lg italic">
+          Yo también he estado al otro lado del mostrador. Por eso te entiendo.
         </p>
-        <ul class="space-y-3 text-navy-700">
-          <li class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-gold-500 shrink-0 mt-0.5" /> Colegiada en el Ilustre Colegio de Abogados de Zaragoza (ICAZ)</li>
-          <li class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-gold-500 shrink-0 mt-0.5" /> Especialización exclusiva en derecho de extranjería</li>
-          <li class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-gold-500 shrink-0 mt-0.5" /> Atención personalizada en cada caso</li>
-          <li class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-gold-500 shrink-0 mt-0.5" /> Idiomas: español, inglés y francés</li>
+
+        <p data-animate data-mode="right" data-animate-delay="4" class="text-burgundy-700 mb-5 leading-relaxed">
+          Soy abogada colegiada en REICAZ con el número <strong>7237</strong>. Estudié Derecho en Burgos, hice el máster de acceso a la abogacía en Zaragoza y desde <strong>2023</strong> ejerzo aquí. Pero antes de todo eso fui — y sigo siendo — migrante. Por eso elegí especializarme en <strong>extranjería</strong>: porque para mí no es una carrera profesional, es la forma más concreta que tengo de devolver algo a mi propia comunidad.
+        </p>
+
+        <p data-animate data-mode="right" data-animate-delay="5" class="text-burgundy-700 mb-5 leading-relaxed">
+          Cuando llevo tu caso no me limito a presentar un expediente y desaparecer hasta que llegue la respuesta. Te explico cada paso en lenguaje claro, te cuento qué puede pasar y qué no, y si veo que tu situación no tiene salida real, <strong>te lo digo el primer día</strong>. Prefiero perder un cliente a llevarte por un camino que sé que va a salir mal.
+        </p>
+
+        <p data-animate data-mode="right" data-animate-delay="6" class="text-burgundy-700 mb-5 leading-relaxed">
+          Trabajo también <strong>derecho penal</strong> y <strong>derecho de familia</strong> porque la vida de una persona migrante rara vez cabe en un solo expediente: se cruzan custodias, divorcios, denuncias, recursos. Te llevo el caso de forma integral, sin que tengas que correr de despacho en despacho contando tu historia desde cero cada vez.
+        </p>
+
+        <p data-animate data-mode="right" data-animate-delay="7" class="text-burgundy-700 mb-7 leading-relaxed">
+          Y porque sé que la nacionalidad no termina cuando presentas el expediente, sino cuando apruebas los exámenes, también te <strong>preparo para el CCSE y el DELE</strong>. Mi trabajo no es papelear. Es acompañarte hasta el final.
+        </p>
+
+        <ul class="space-y-3 text-burgundy-700">
+          <li data-animate data-animate-delay="8" class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-cream-600 shrink-0 mt-0.5" /> Colegiada en el Real e Ilustre Colegio de Abogados de Zaragoza (REICAZ), nº 7237</li>
+          <li data-animate data-animate-delay="8" class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-cream-600 shrink-0 mt-0.5" /> Atiendo en español y francés</li>
+          <li data-animate data-animate-delay="8" class="flex gap-3 items-start"><Icon name="shield-check" size={20} class="text-cream-600 shrink-0 mt-0.5" /> Despacho en Zaragoza · Atención en toda España con cita previa</li>
         </ul>
       </div>
     </div>
   </section>
 
   <!-- PROCESO -->
-  <section id="proceso" class="py-24">
+  <section id="proceso" class="py-24 bg-cream-50">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-14" data-animate>
-        <div class="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">Cómo trabajo</div>
-        <h2 class="text-3xl md:text-4xl font-bold text-navy-900">Tu caso, en 4 pasos claros</h2>
+      <div class="text-center mb-20">
+        <div data-animate class="text-cream-600 text-xs font-semibold uppercase tracking-[0.2em] mb-4">— Cómo trabajo —</div>
+        <h2 data-animate data-mode="rise" data-animate-delay="1" class="font-serif text-4xl md:text-5xl font-semibold text-burgundy-900 tracking-tight">Tu caso, en 4 pasos claros</h2>
       </div>
-      <div class="grid md:grid-cols-4 gap-6">
-        {pasos.map((p, i) => (
-          <div data-animate data-animate-delay={String(i + 1)} class="relative bg-white border border-navy-100 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <div class="text-5xl font-serif font-bold text-gold-400 mb-3">{p.n}</div>
-            <h3 class="text-lg font-bold text-navy-900 mb-2">{p.t}</h3>
-            <p class="text-sm text-navy-700 leading-relaxed">{p.d}</p>
-          </div>
-        ))}
+      <div class="relative">
+        <!-- Connector line (desktop only) — draws left-to-right on view -->
+        <div aria-hidden="true" data-animate data-mode="draw" data-animate-delay="2" class="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-burgundy-400 to-transparent"></div>
+        <div class="grid md:grid-cols-4 gap-8 md:gap-6 relative">
+          {pasos.map((p, i) => (
+            <div class="relative flex flex-col items-center text-center">
+              <!-- Number circle: scale-in with bounce -->
+              <div data-animate data-mode="scale" data-animate-delay={String(i + 2)} class="relative z-10 w-16 h-16 rounded-full bg-burgundy-800 text-cream-300 flex items-center justify-center font-serif text-xl font-bold shadow-lg shadow-burgundy-900/30 ring-4 ring-cream-50 mb-5">
+                {p.n}
+              </div>
+              <h3 data-animate data-animate-delay={String(i + 3)} class="font-serif text-xl font-semibold text-burgundy-900 mb-3 px-2">{p.t}</h3>
+              <p data-animate data-animate-delay={String(i + 4)} class="text-sm text-burgundy-700 leading-relaxed max-w-[220px]">{p.d}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- TESTIMONIOS -->
-  <section id="testimonios" class="py-24 bg-navy-900 text-white">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-14" data-animate>
-        <div class="text-gold-400 text-sm font-semibold uppercase tracking-wider mb-3">Lo que dicen mis clientes</div>
-        <h2 class="text-3xl md:text-4xl font-bold">Historias reales, resultados reales</h2>
+  <!-- COMPROMISO -->
+  <section id="compromiso" class="py-24 bg-burgundy-900 text-white relative overflow-hidden">
+    <!-- Watermark Amd inferior -->
+    <div aria-hidden="true" class="pointer-events-none absolute -left-16 -bottom-16 select-none font-logo text-[14rem] md:text-[20rem] leading-none text-cream-300/5 watermark-drift">Amd</div>
+    <div class="relative max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <div data-animate class="text-cream-400 text-xs font-semibold uppercase tracking-[0.2em] mb-3">— Mi compromiso contigo —</div>
+        <h2 data-animate data-mode="rise" data-animate-delay="1" class="font-serif text-4xl md:text-5xl font-semibold tracking-tight">Tres cosas que <span class="text-cream-300">siempre cumplo.</span></h2>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        {testimonios.map((t, i) => (
-          <div data-animate data-animate-delay={String(i + 1)} class="bg-white/5 border border-white/10 rounded-2xl p-7 backdrop-blur">
-            <div class="flex gap-1 text-gold-400 mb-4">
-              <Icon name="star" size={18} class="fill-current" />
-              <Icon name="star" size={18} class="fill-current" />
-              <Icon name="star" size={18} class="fill-current" />
-              <Icon name="star" size={18} class="fill-current" />
-              <Icon name="star" size={18} class="fill-current" />
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+        {principios.map((p, i) => (
+          <article
+            data-animate
+            data-mode={i === 0 ? 'left' : i === 2 ? 'right' : undefined}
+            data-animate-delay={String(i + 1)}
+            class="group flex flex-col bg-white/5 border border-cream-300/10 rounded-2xl p-8 backdrop-blur lift-on-hover hover:bg-white/10 hover:border-cream-300/30"
+          >
+            <div class="w-14 h-14 rounded-full bg-cream-300/10 flex items-center justify-center text-cream-300 mb-6 ring-1 ring-cream-300/20 group-hover:bg-cream-300 group-hover:text-burgundy-900 group-hover:ring-cream-300 transition-all duration-300">
+              <span class="icon-tilt inline-flex"><Icon name={p.icon} size={26} /></span>
             </div>
-            <p class="text-white/90 leading-relaxed mb-6 italic">"{t.texto}"</p>
-            <div class="border-t border-white/10 pt-4">
-              <div class="font-semibold">{t.nombre}</div>
-              <div class="text-xs text-white/60 mt-0.5">{t.pais} · {t.caso}</div>
-            </div>
-          </div>
+            <h3 class="font-serif text-2xl font-semibold text-white mb-4 tracking-tight">{p.titulo}</h3>
+            <p class="text-cream-100/85 leading-relaxed text-sm">{p.texto}</p>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="py-24">
+  <section id="faq" class="py-24 bg-white">
     <div class="max-w-3xl mx-auto px-6">
-      <div class="text-center mb-14" data-animate>
-        <div class="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">Preguntas frecuentes</div>
-        <h2 class="text-3xl md:text-4xl font-bold text-navy-900">Resolvemos tus dudas</h2>
+      <div class="text-center mb-14">
+        <div data-animate class="text-cream-600 text-xs font-semibold uppercase tracking-[0.2em] mb-3">— Preguntas frecuentes —</div>
+        <h2 data-animate data-mode="rise" data-animate-delay="1" class="font-serif text-4xl md:text-5xl font-semibold text-burgundy-900 tracking-tight">Resolvemos tus dudas</h2>
       </div>
       <div class="space-y-3">
         {faq.map((f, i) => (
-          <details data-animate data-animate-delay={String((i % 3) + 1)} class="group bg-white border border-navy-100 rounded-xl overflow-hidden hover:border-gold-400 transition-colors">
-            <summary class="cursor-pointer px-6 py-5 font-semibold text-navy-900 flex justify-between items-center list-none gap-4">
+          <details data-animate data-mode="left" data-animate-delay={String(i + 1)} class="group bg-cream-50/50 border border-burgundy-100 rounded-xl overflow-hidden hover:border-cream-500 transition-colors">
+            <summary class="cursor-pointer px-6 py-5 font-semibold text-burgundy-900 flex justify-between items-center list-none gap-4">
               <span>{f.q}</span>
-              <span class="text-gold-500 group-open:rotate-45 transition-transform shrink-0">
+              <span class="text-cream-600 group-open:rotate-45 transition-transform shrink-0">
                 <Icon name="plus" size={22} />
               </span>
             </summary>
-            <div class="px-6 pb-5 text-navy-700 leading-relaxed">{f.a}</div>
+            <div class="px-6 pb-5 text-burgundy-700 leading-relaxed">{f.a}</div>
           </details>
         ))}
       </div>
@@ -259,110 +423,117 @@ const faq = [
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto" class="py-24 bg-gradient-to-br from-navy-800 to-navy-900 text-white">
+  <section id="contacto" class="py-24 bg-gradient-to-br from-burgundy-800 to-burgundy-900 text-white">
     <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12">
-      <div data-animate>
-        <div class="text-gold-400 text-sm font-semibold uppercase tracking-wider mb-3">Consulta gratis</div>
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">Hablemos de tu caso</h2>
-        <p class="text-white/80 mb-8 leading-relaxed">
-          Respondo en menos de 24 horas laborables. Toda la información que compartas está protegida por el secreto profesional.
+      <div>
+        <div data-animate data-mode="left" class="text-cream-400 text-xs font-semibold uppercase tracking-[0.2em] mb-3">— Hablemos —</div>
+        <h2 data-animate data-mode="left" data-animate-delay="1" class="font-serif text-4xl md:text-5xl font-semibold mb-6 tracking-tight">Cuéntame<br/><span class="text-cream-300">tu caso.</span></h2>
+        <p data-animate data-mode="left" data-animate-delay="2" class="text-cream-100/80 mb-8 leading-relaxed">
+          Respondo en menos de 24 horas laborables. Toda la información que compartas está protegida por el secreto profesional. Si tu caso no es viable, te lo diré desde el primer momento.
         </p>
-        <div class="space-y-5 text-white/90">
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-lg bg-gold-400/15 flex items-center justify-center text-gold-400 shrink-0">
+        <div class="space-y-5 text-cream-100/90">
+          <div data-animate data-mode="left" data-animate-delay="3" class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-cream-300/10 flex items-center justify-center text-cream-300 shrink-0 ring-1 ring-cream-300/20">
               <Icon name="map-pin" size={20} />
             </div>
             <div>
-              <div class="font-semibold">Despacho en Zaragoza</div>
-              <div class="text-sm text-white/70">Paseo de la Independencia, 00 · 50001 Zaragoza</div>
+              <div class="font-semibold text-white">Despacho en Zaragoza</div>
+              <a href="https://maps.google.com/?q=C/+Coso+77,+50001+Zaragoza" target="_blank" rel="noopener" class="block text-sm text-cream-100/70 hover:text-cream-300 transition underline underline-offset-2 decoration-cream-300/30 hover:decoration-cream-300">
+                C/ Coso 77<br/>
+                <span class="no-underline">Principal izquierda</span><br/>
+                50001 Zaragoza
+              </a>
+              <div class="text-xs text-cream-300 mt-1 font-semibold uppercase tracking-wider">Solo con cita previa</div>
             </div>
           </div>
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-lg bg-gold-400/15 flex items-center justify-center text-gold-400 shrink-0">
+          <div data-animate data-mode="left" data-animate-delay="4" class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-cream-300/10 flex items-center justify-center text-cream-300 shrink-0 ring-1 ring-cream-300/20">
               <Icon name="phone" size={20} />
             </div>
             <div>
-              <a href="tel:+34653413088" class="font-semibold hover:text-gold-400 transition">+34 653 41 30 88</a>
-              <div class="text-sm text-white/70">Lunes a viernes · 9:00 – 19:00</div>
+              <a href="tel:+34653413088" class="font-semibold text-white hover:text-cream-300 transition">+34 653 41 30 88</a>
+              <div class="text-sm text-cream-100/70">L–J 9:30–13:30 · 16:30–20:00</div>
+              <div class="text-sm text-cream-100/70">V 9:30–13:30</div>
             </div>
           </div>
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-lg bg-gold-400/15 flex items-center justify-center text-gold-400 shrink-0">
+          <div data-animate data-mode="left" data-animate-delay="5" class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-cream-300/10 flex items-center justify-center text-cream-300 shrink-0 ring-1 ring-cream-300/20">
               <Icon name="mail" size={20} />
             </div>
             <div>
-              <a href="mailto:amartinezabogada@hotmail.com" class="font-semibold hover:text-gold-400 transition break-all">amartinezabogada@hotmail.com</a>
-              <div class="text-sm text-white/70">Respuesta en menos de 24h</div>
+              <a href="mailto:abrilmartinez@reicaz.com" class="font-semibold text-white hover:text-cream-300 transition break-all">abrilmartinez@reicaz.com</a>
+              <div class="text-sm text-cream-100/70">Respuesta en menos de 24h</div>
             </div>
           </div>
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-lg bg-gold-400/15 flex items-center justify-center text-gold-400 shrink-0">
+          <div data-animate data-mode="left" data-animate-delay="6" class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-cream-300/10 flex items-center justify-center text-cream-300 shrink-0 ring-1 ring-cream-300/20">
               <Icon name="instagram" size={20} />
             </div>
             <div>
-              <a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener" class="font-semibold hover:text-gold-400 transition">@abrilmartinezabogada</a>
-              <div class="text-sm text-white/70">Sígueme en Instagram</div>
+              <a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener" aria-label="Instagram de Abril (abre en nueva pestaña)" class="font-semibold text-white hover:text-cream-300 transition">@abrilmartinezabogada</a>
+              <div class="text-sm text-cream-100/70">Sígueme en Instagram</div>
             </div>
           </div>
         </div>
       </div>
-      <form class="bg-white rounded-2xl p-8 text-navy-900 shadow-2xl" data-animate data-animate-delay="1">
-        <div class="mb-5">
-          <label class="block text-sm font-semibold mb-2">Mi nombre es</label>
-          <input type="text" required class="w-full px-4 py-3 border border-navy-100 rounded-lg focus:outline-none focus:border-gold-500 transition" placeholder="Nombre y apellidos" />
+      <form id="contact-form" class="bg-cream-50 rounded-2xl p-8 text-burgundy-900 shadow-2xl shadow-burgundy-950/40 border border-cream-200" data-animate data-mode="right" novalidate>
+        <div data-animate data-animate-delay="1" class="mb-5">
+          <label for="cf-name" class="block text-sm font-semibold mb-2">Mi nombre es</label>
+          <input id="cf-name" name="name" type="text" required autocomplete="name" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="Nombre y apellidos" />
         </div>
-        <div class="mb-5">
-          <label class="block text-sm font-semibold mb-2">Mi teléfono</label>
-          <input type="tel" required class="w-full px-4 py-3 border border-navy-100 rounded-lg focus:outline-none focus:border-gold-500 transition" placeholder="+34 600 000 000" />
+        <div data-animate data-animate-delay="2" class="mb-5">
+          <label for="cf-phone" class="block text-sm font-semibold mb-2">Mi teléfono</label>
+          <input id="cf-phone" name="phone" type="tel" required autocomplete="tel" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="+34 600 000 000" />
         </div>
-        <div class="mb-5">
-          <label class="block text-sm font-semibold mb-2">Mi email</label>
-          <input type="email" required class="w-full px-4 py-3 border border-navy-100 rounded-lg focus:outline-none focus:border-gold-500 transition" placeholder="tu@email.com" />
+        <div data-animate data-animate-delay="3" class="mb-5">
+          <label for="cf-email" class="block text-sm font-semibold mb-2">Mi email</label>
+          <input id="cf-email" name="email" type="email" required autocomplete="email" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="tu@email.com" />
         </div>
-        <div class="mb-5">
-          <label class="block text-sm font-semibold mb-2">Cuéntame tu situación</label>
-          <textarea rows="4" class="w-full px-4 py-3 border border-navy-100 rounded-lg focus:outline-none focus:border-gold-500 transition resize-none" placeholder="Describe brevemente tu caso..."></textarea>
+        <div data-animate data-animate-delay="4" class="mb-5">
+          <label for="cf-message" class="block text-sm font-semibold mb-2">Cuéntame tu situación</label>
+          <textarea id="cf-message" name="message" rows="4" required class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition resize-none" placeholder="Describe brevemente tu caso..."></textarea>
         </div>
-        <label class="flex items-start gap-2 text-xs text-navy-700 mb-5">
-          <input type="checkbox" required class="mt-0.5" />
-          <span>He leído y acepto la <a href="/politica-privacidad" class="text-gold-600 underline">política de privacidad</a> (RGPD).</span>
+        <label data-animate data-animate-delay="5" class="flex items-start gap-2 text-xs text-burgundy-700 mb-5">
+          <input type="checkbox" name="consent" required class="mt-0.5" />
+          <span>He leído y acepto la <a href="/politica-privacidad" class="text-cream-600 underline">política de privacidad</a> (RGPD).</span>
         </label>
-        <button type="submit" class="w-full bg-navy-800 hover:bg-navy-900 text-white font-semibold py-4 rounded-lg transition inline-flex items-center justify-center gap-2">
-          Enviar consulta gratuita
-          <Icon name="arrow-right" size={18} />
+        <button data-animate data-animate-delay="6" type="submit" class="group w-full bg-burgundy-800 hover:bg-burgundy-900 text-white font-semibold py-4 rounded-lg transition inline-flex items-center justify-center gap-2 cursor-pointer hover:-translate-y-0.5">
+          Enviar mi consulta
+          <Icon name="arrow-right" size={18} class="group-hover:translate-x-1 transition-transform" />
         </button>
-        <p class="text-xs text-navy-700 text-center mt-4 inline-flex items-center justify-center gap-1 w-full">
-          <Icon name="shield-check" size={14} class="text-gold-600" />
-          Protegido por secreto profesional. Respuesta en menos de 24h.
+        <p id="cf-status" class="text-xs text-burgundy-700 text-center mt-4 inline-flex items-center justify-center gap-1 w-full">
+          <Icon name="shield-check" size={14} class="text-cream-600" />
+          <span>Protegido por secreto profesional. Respuesta en menos de 24h.</span>
         </p>
       </form>
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
-  <footer class="bg-navy-900 text-white/60 border-t border-white/10">
+  <footer class="bg-burgundy-900 text-cream-100/80 border-t border-cream-300/10">
     <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8 text-sm">
-      <div>
-        <div class="font-serif text-xl font-bold text-white mb-3 tracking-wider">AMD <span class="text-gold-400">|</span> Abogados</div>
+      <div data-animate data-animate-delay="1">
+        <div class="mb-4"><Logo variant="dark" showTagline={false} size="md" /></div>
         <p class="leading-relaxed">Abril Martínez Decena · Abogada colegiada en extranjería. Zaragoza, Aragón.</p>
       </div>
-      <div>
+      <div data-animate data-animate-delay="2">
         <div class="font-semibold text-white mb-3">Contacto</div>
         <ul class="space-y-1.5">
-          <li>Paseo de la Independencia, 00</li>
-          <li>50001 Zaragoza</li>
-          <li><a href="tel:+34653413088" class="hover:text-gold-400">+34 653 41 30 88</a></li>
-          <li><a href="mailto:amartinezabogada@hotmail.com" class="hover:text-gold-400 break-all">amartinezabogada@hotmail.com</a></li>
-          <li><a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener" class="hover:text-gold-400">@abrilmartinezabogada</a></li>
+          <li><a href="https://maps.google.com/?q=C/+Coso+77,+50001+Zaragoza" target="_blank" rel="noopener" class="hover:text-cream-300 transition">C/ Coso 77, Pral. Izda. · 50001 Zaragoza</a></li>
+          <li><a href="tel:+34653413088" class="hover:text-cream-300 transition">+34 653 41 30 88</a></li>
+          <li><a href="mailto:abrilmartinez@reicaz.com" class="hover:text-cream-300 transition break-all">abrilmartinez@reicaz.com</a></li>
+          <li><a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener" aria-label="Instagram de Abril (abre en nueva pestaña)" class="hover:text-cream-300 transition">@abrilmartinezabogada</a></li>
         </ul>
       </div>
-      <div>
+      <div data-animate data-animate-delay="3">
         <div class="font-semibold text-white mb-3">Legal</div>
         <ul class="space-y-1.5">
-          <li><a href="/aviso-legal" class="hover:text-gold-400">Aviso legal</a></li>
-          <li><a href="/politica-privacidad" class="hover:text-gold-400">Política de privacidad</a></li>
-          <li><a href="/politica-cookies" class="hover:text-gold-400">Política de cookies</a></li>
-          <li>Nº colegiada ICAZ: 0000</li>
+          <li><a href="/aviso-legal" class="hover:text-cream-300 transition">Aviso legal</a></li>
+          <li><a href="/politica-privacidad" class="hover:text-cream-300 transition">Política de privacidad</a></li>
+          <li><a href="/politica-cookies" class="hover:text-cream-300 transition">Política de cookies</a></li>
+          <li>Nº colegiada REICAZ 7237</li>
         </ul>
       </div>
     </div>
@@ -384,34 +555,85 @@ const faq = [
 
   <CookieBanner />
 
-  <script is:inline>
-    // Mobile menu toggle
-    (function () {
-      const btn = document.getElementById('mobile-menu-toggle');
-      const menu = document.getElementById('mobile-menu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-      menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => menu.classList.add('hidden')));
-    })();
+  <script>
+    function setupLanding() {
+      // Contact form → mailto prefill
+      const form = document.getElementById('contact-form') as HTMLFormElement | null;
+      if (form) {
+        form.addEventListener('submit', (ev) => {
+          ev.preventDefault();
+          const data = new FormData(form);
+          const name = (data.get('name') || '').toString().trim();
+          const phone = (data.get('phone') || '').toString().trim();
+          const email = (data.get('email') || '').toString().trim();
+          const message = (data.get('message') || '').toString().trim();
+          const consent = data.get('consent');
+          if (!name || !phone || !email || !message || !consent) {
+            form.reportValidity();
+            return;
+          }
+          const subject = encodeURIComponent('Nueva consulta web — ' + name);
+          const body = encodeURIComponent(
+            'Nombre: ' + name + '\n' +
+            'Teléfono: ' + phone + '\n' +
+            'Email: ' + email + '\n\n' +
+            'Consulta:\n' + message + '\n\n' +
+            '— Enviado desde amd-abogados.vercel.app'
+          );
+          window.location.href = 'mailto:abrilmartinez@reicaz.com?subject=' + subject + '&body=' + body;
+        });
+      }
 
-    // Scroll-in animations
-    (function () {
+      // Scroll-in animations + stat counter count-up
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const selector = '[data-animate], [data-counter], [data-stars], [data-icon-pulse]';
+
       if (!('IntersectionObserver' in window)) {
-        document.querySelectorAll('[data-animate]').forEach((el) => el.classList.add('in-view'));
+        document.querySelectorAll(selector).forEach((el) => {
+          el.classList.add('in-view');
+          const tgt = el.getAttribute('data-target');
+          if (tgt) {
+            const valueEl = el.querySelector('.counter-value');
+            if (valueEl) valueEl.textContent = tgt;
+          }
+        });
         return;
       }
+
+      const runCounter = (el: Element) => {
+        const target = parseInt(el.getAttribute('data-target') || '0', 10);
+        const valueEl = el.querySelector('.counter-value');
+        if (!valueEl) return;
+        if (reduce) { valueEl.textContent = String(target); return; }
+        const duration = 1400;
+        const startTime = performance.now();
+        const tick = (now: number) => {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          valueEl.textContent = String(Math.round(target * eased));
+          if (progress < 1) requestAnimationFrame(tick);
+          else valueEl.textContent = String(target);
+        };
+        requestAnimationFrame(tick);
+      };
+
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add('in-view');
-              io.unobserve(e.target);
-            }
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            el.classList.add('in-view');
+            if (el.hasAttribute('data-counter')) runCounter(el);
+            io.unobserve(el);
           });
         },
-        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.18, rootMargin: '0px 0px -40px 0px' }
       );
-      document.querySelectorAll('[data-animate]').forEach((el) => io.observe(el));
-    })();
+      document.querySelectorAll(selector).forEach((el) => io.observe(el));
+    }
+
+    setupLanding();
+    document.addEventListener('astro:page-load', setupLanding);
   </script>
 </Layout>
