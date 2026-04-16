@@ -478,30 +478,26 @@ const faqSchema = {
       </div>
       <form id="contact-form" action="https://formspree.io/f/xnjlpqev" method="POST" class="bg-cream-50 rounded-2xl p-8 text-burgundy-900 shadow-2xl shadow-burgundy-950/40 border border-cream-200" data-animate data-mode="right" novalidate>
         <input type="hidden" name="_subject" value="Nueva consulta web — AMD Abogados" />
-        <!-- Honeypot anti-spam (Formspree nativo) -->
+        <!-- Honeypot anti-spam (Formspree oculta campos con prefijo _) -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-        <!-- Honeypot adicional (bots rellenan campos con nombres atractivos) -->
-        <div style="position:absolute;left:-9999px" aria-hidden="true">
-          <label>No rellenar este campo<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-        </div>
         <div data-animate data-animate-delay="1" class="mb-5">
           <label for="cf-name" class="block text-sm font-semibold mb-2">Mi nombre es</label>
-          <input id="cf-name" name="name" type="text" required autocomplete="name" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="Nombre y apellidos" />
+          <input id="cf-name" name="Nombre" type="text" required autocomplete="name" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="Nombre y apellidos" />
         </div>
         <div data-animate data-animate-delay="2" class="mb-5">
           <label for="cf-phone" class="block text-sm font-semibold mb-2">Mi teléfono</label>
-          <input id="cf-phone" name="phone" type="tel" required autocomplete="tel" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="+34 600 000 000" />
+          <input id="cf-phone" name="Teléfono" type="tel" required autocomplete="tel" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="+34 600 000 000" />
         </div>
         <div data-animate data-animate-delay="3" class="mb-5">
           <label for="cf-email" class="block text-sm font-semibold mb-2">Mi email</label>
-          <input id="cf-email" name="email" type="email" required autocomplete="email" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="tu@email.com" />
+          <input id="cf-email" name="Email" type="email" required autocomplete="email" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="tu@email.com" />
         </div>
         <div data-animate data-animate-delay="4" class="mb-5">
           <label for="cf-message" class="block text-sm font-semibold mb-2">Cuéntame tu situación</label>
-          <textarea id="cf-message" name="message" rows="4" required class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition resize-none" placeholder="Describe brevemente tu caso..."></textarea>
+          <textarea id="cf-message" name="Consulta" rows="4" required class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition resize-none" placeholder="Describe brevemente tu caso..."></textarea>
         </div>
         <label data-animate data-animate-delay="5" class="flex items-start gap-2 text-xs text-burgundy-700 mb-5">
-          <input type="checkbox" name="consent" required class="mt-0.5" />
+          <input type="checkbox" name="_consent" required class="mt-0.5" />
           <span>He leído y acepto la <a href="/politica-privacidad" class="text-cream-600 underline">política de privacidad</a> (RGPD).</span>
         </label>
         <button data-animate data-animate-delay="6" type="submit" id="cf-submit" class="group w-full bg-burgundy-800 hover:bg-burgundy-900 text-white font-semibold py-4 rounded-lg transition inline-flex items-center justify-center gap-2 cursor-pointer hover:-translate-y-0.5">
@@ -573,15 +569,12 @@ const faqSchema = {
           const statusEl = document.getElementById('cf-status');
           const submitBtn = document.getElementById('cf-submit') as HTMLButtonElement | null;
 
-          // Honeypot check (bots fill hidden fields)
-          if (data.get('website')) return;
-
           // Validate required fields
-          const name = (data.get('name') || '').toString().trim();
-          const phone = (data.get('phone') || '').toString().trim();
-          const email = (data.get('email') || '').toString().trim();
-          const message = (data.get('message') || '').toString().trim();
-          const consent = data.get('consent');
+          const name = (data.get('Nombre') || '').toString().trim();
+          const phone = (data.get('Teléfono') || '').toString().trim();
+          const email = (data.get('Email') || '').toString().trim();
+          const message = (data.get('Consulta') || '').toString().trim();
+          const consent = data.get('_consent');
           if (!name || !phone || !email || !message || !consent) {
             form.reportValidity();
             return;

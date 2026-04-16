@@ -26,7 +26,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'sha256-FlPsDe+sRHffHK3FVmqcplimY9b72CSkqwFOxj6QAmI=' 'sha256-J33qE0wd7Zw0NCwRZpMgi3wcJVI2yRZ2to0QTSeTyjo=' 'sha256-nbGI/qIm0nMyFU97NtQ/6BfRCNZowMtCyupaxc+iaEQ=' 'sha256-ywKuLKLMyZ9aH4Hbbq7RGGMevz+F/KyT0c62Mm0+FaE='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob:; connect-src 'self' https://formspree.io; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://formspree.io; object-src 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'sha256-5yqNhoX6V6YTjlsqTKX1syWYIfT3LFEI0HfwL4hf9sU=' 'sha256-FlPsDe+sRHffHK3FVmqcplimY9b72CSkqwFOxj6QAmI=' 'sha256-nbGI/qIm0nMyFU97NtQ/6BfRCNZowMtCyupaxc+iaEQ=' 'sha256-ywKuLKLMyZ9aH4Hbbq7RGGMevz+F/KyT0c62Mm0+FaE='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob:; connect-src 'self' https://formspree.io; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://formspree.io; object-src 'none'; upgrade-insecure-requests"
         }
       ]
     },
