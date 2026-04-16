@@ -438,7 +438,7 @@ const faqSchema = {
             </div>
             <div>
               <div class="font-semibold text-white">Despacho en Zaragoza</div>
-              <a href="https://maps.google.com/?q=C/+Coso+77,+50001+Zaragoza" target="_blank" rel="noopener" class="block text-sm text-cream-100/70 hover:text-cream-300 transition underline underline-offset-2 decoration-cream-300/30 hover:decoration-cream-300">
+              <a href="https://maps.google.com/?q=C/+Coso+77,+50001+Zaragoza" target="_blank" rel="noopener noreferrer" class="block text-sm text-cream-100/70 hover:text-cream-300 transition underline underline-offset-2 decoration-cream-300/30 hover:decoration-cream-300">
                 C/ Coso 77<br/>
                 <span class="no-underline">Principal izquierda</span><br/>
                 50001 Zaragoza
@@ -470,13 +470,20 @@ const faqSchema = {
               <Icon name="instagram" size={20} />
             </div>
             <div>
-              <a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener" aria-label="Instagram de Abril (abre en nueva pestaña)" class="font-semibold text-white hover:text-cream-300 transition">@abrilmartinezabogada</a>
+              <a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Abril (abre en nueva pestaña)" class="font-semibold text-white hover:text-cream-300 transition">@abrilmartinezabogada</a>
               <div class="text-sm text-cream-100/70">Sígueme en Instagram</div>
             </div>
           </div>
         </div>
       </div>
-      <form id="contact-form" class="bg-cream-50 rounded-2xl p-8 text-burgundy-900 shadow-2xl shadow-burgundy-950/40 border border-cream-200" data-animate data-mode="right" novalidate>
+      <form id="contact-form" action="https://formspree.io/f/xnjlpqev" method="POST" class="bg-cream-50 rounded-2xl p-8 text-burgundy-900 shadow-2xl shadow-burgundy-950/40 border border-cream-200" data-animate data-mode="right" novalidate>
+        <input type="hidden" name="_subject" value="Nueva consulta web — AMD Abogados" />
+        <!-- Honeypot anti-spam (Formspree nativo) -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <!-- Honeypot adicional (bots rellenan campos con nombres atractivos) -->
+        <div style="position:absolute;left:-9999px" aria-hidden="true">
+          <label>No rellenar este campo<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
         <div data-animate data-animate-delay="1" class="mb-5">
           <label for="cf-name" class="block text-sm font-semibold mb-2">Mi nombre es</label>
           <input id="cf-name" name="name" type="text" required autocomplete="name" class="w-full px-4 py-3 border border-burgundy-100 rounded-lg bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-cream-600 focus:border-cream-600 transition" placeholder="Nombre y apellidos" />
@@ -497,7 +504,7 @@ const faqSchema = {
           <input type="checkbox" name="consent" required class="mt-0.5" />
           <span>He leído y acepto la <a href="/politica-privacidad" class="text-cream-600 underline">política de privacidad</a> (RGPD).</span>
         </label>
-        <button data-animate data-animate-delay="6" type="submit" class="group w-full bg-burgundy-800 hover:bg-burgundy-900 text-white font-semibold py-4 rounded-lg transition inline-flex items-center justify-center gap-2 cursor-pointer hover:-translate-y-0.5">
+        <button data-animate data-animate-delay="6" type="submit" id="cf-submit" class="group w-full bg-burgundy-800 hover:bg-burgundy-900 text-white font-semibold py-4 rounded-lg transition inline-flex items-center justify-center gap-2 cursor-pointer hover:-translate-y-0.5">
           Enviar mi consulta
           <Icon name="arrow-right" size={18} class="group-hover:translate-x-1 transition-transform" />
         </button>
@@ -521,10 +528,10 @@ const faqSchema = {
       <div data-animate data-animate-delay="2">
         <div class="font-semibold text-white mb-3">Contacto</div>
         <ul class="space-y-1.5">
-          <li><a href="https://maps.google.com/?q=C/+Coso+77,+50001+Zaragoza" target="_blank" rel="noopener" class="hover:text-cream-300 transition">C/ Coso 77, Pral. Izda. · 50001 Zaragoza</a></li>
+          <li><a href="https://maps.google.com/?q=C/+Coso+77,+50001+Zaragoza" target="_blank" rel="noopener noreferrer" class="hover:text-cream-300 transition">C/ Coso 77, Pral. Izda. · 50001 Zaragoza</a></li>
           <li><a href="tel:+34653413088" class="hover:text-cream-300 transition">+34 653 41 30 88</a></li>
           <li><a href="mailto:abrilmartinez@reicaz.com" class="hover:text-cream-300 transition break-all">abrilmartinez@reicaz.com</a></li>
-          <li><a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener" aria-label="Instagram de Abril (abre en nueva pestaña)" class="hover:text-cream-300 transition">@abrilmartinezabogada</a></li>
+          <li><a href="https://instagram.com/abrilmartinezabogada" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Abril (abre en nueva pestaña)" class="hover:text-cream-300 transition">@abrilmartinezabogada</a></li>
         </ul>
       </div>
       <div data-animate data-animate-delay="3">
@@ -546,7 +553,7 @@ const faqSchema = {
   <a
     href="https://wa.me/34653413088?text=Hola%20Abril%2C%20quiero%20consultar%20sobre%20mi%20caso%20de%20extranjer%C3%ADa"
     target="_blank"
-    rel="noopener"
+    rel="noopener noreferrer"
     class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#1ebe5a] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl hover:scale-110 transition-transform"
     aria-label="Contactar por WhatsApp"
   >
@@ -557,12 +564,19 @@ const faqSchema = {
 
   <script>
     function setupLanding() {
-      // Contact form → mailto prefill
+      // Contact form → Formspree (secure POST, no PII in URL)
       const form = document.getElementById('contact-form') as HTMLFormElement | null;
       if (form) {
-        form.addEventListener('submit', (ev) => {
+        form.addEventListener('submit', async (ev) => {
           ev.preventDefault();
           const data = new FormData(form);
+          const statusEl = document.getElementById('cf-status');
+          const submitBtn = document.getElementById('cf-submit') as HTMLButtonElement | null;
+
+          // Honeypot check (bots fill hidden fields)
+          if (data.get('website')) return;
+
+          // Validate required fields
           const name = (data.get('name') || '').toString().trim();
           const phone = (data.get('phone') || '').toString().trim();
           const email = (data.get('email') || '').toString().trim();
@@ -572,15 +586,35 @@ const faqSchema = {
             form.reportValidity();
             return;
           }
-          const subject = encodeURIComponent('Nueva consulta web — ' + name);
-          const body = encodeURIComponent(
-            'Nombre: ' + name + '\n' +
-            'Teléfono: ' + phone + '\n' +
-            'Email: ' + email + '\n\n' +
-            'Consulta:\n' + message + '\n\n' +
-            '— Enviado desde amd-abogados.vercel.app'
-          );
-          window.location.href = 'mailto:abrilmartinez@reicaz.com?subject=' + subject + '&body=' + body;
+
+          // Rate limiting (30s between submissions)
+          const lastSubmit = sessionStorage.getItem('amd-form-ts');
+          if (lastSubmit && Date.now() - Number(lastSubmit) < 30000) {
+            if (statusEl) statusEl.innerHTML = '<span class="text-burgundy-600">Por favor, espera unos segundos antes de enviar de nuevo.</span>';
+            return;
+          }
+
+          // Disable button while sending
+          if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando...'; }
+
+          try {
+            const res = await fetch(form.action, {
+              method: 'POST',
+              headers: { 'Accept': 'application/json' },
+              body: data,
+            });
+            if (res.ok) {
+              sessionStorage.setItem('amd-form-ts', String(Date.now()));
+              form.reset();
+              if (statusEl) statusEl.innerHTML = '<span class="text-green-700 font-semibold">✓ Consulta enviada correctamente. Te responderé en menos de 24h.</span>';
+            } else {
+              if (statusEl) statusEl.innerHTML = '<span class="text-red-700">Error al enviar. Prueba por <a href="https://wa.me/34653413088" class="underline">WhatsApp</a> o <a href="mailto:abrilmartinez@reicaz.com" class="underline">email</a>.</span>';
+            }
+          } catch {
+            if (statusEl) statusEl.innerHTML = '<span class="text-red-700">Error de conexión. Prueba por <a href="https://wa.me/34653413088" class="underline">WhatsApp</a> o <a href="mailto:abrilmartinez@reicaz.com" class="underline">email</a>.</span>';
+          } finally {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Enviar mi consulta'; }
+          }
         });
       }
 
