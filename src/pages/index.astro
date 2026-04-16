@@ -590,11 +590,32 @@ const faqSchema = {
           // Disable button while sending
           if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando...'; }
 
+          // Build clean formatted payload for Formspree
+          const payload = new FormData();
+          payload.set('_subject', 'Nueva consulta de ' + name + ' — AMD Abogados');
+          payload.set('_replyto', email);
+          payload.set('_gotcha', '');
+          payload.set('Detalle de la consulta',
+            '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+            '  NUEVA CONSULTA WEB\n' +
+            '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+            '▸ Nombre:     ' + name + '\n' +
+            '▸ Teléfono:   ' + phone + '\n' +
+            '▸ Email:      ' + email + '\n\n' +
+            '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+            '  CONSULTA\n' +
+            '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+            message + '\n\n' +
+            '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+            'Enviado desde amd-abogados.vercel.app\n' +
+            'Puede responder directamente a este email.\n'
+          );
+
           try {
             const res = await fetch(form.action, {
               method: 'POST',
               headers: { 'Accept': 'application/json' },
-              body: data,
+              body: payload,
             });
             if (res.ok) {
               sessionStorage.setItem('amd-form-ts', String(Date.now()));
